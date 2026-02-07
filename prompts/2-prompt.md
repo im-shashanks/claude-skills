@@ -1,0 +1,12 @@
+I am in pursuit of creating a coding setup/framework, called shaktra, using claude code features like rules, skills, mcp, hooks,
+etc. This framework will have opinionated workflow using different main agents and subagents in tandem to create industry          
+standard, reliable, production code. This framework/setup is going to follow agile methodology in some ways. Now, we don't have to
+work on everything from scratch there is already a version of it I have been using, called Forge. However, that setup was just built without much
+planning and therefore, it has gotten very bloated, messy, and things have been added on to pre-existing items haphazardly. Its  
+currently very difficult to maintain. Therefore, I would like to take this opportunity to build this setup very carefuly         
+scrutinizing everything and in a very maintainable way. Idea would be to work on each aspect one at a time, utilize the available details from Forge, but scrutinize and use it only the correct way.
+Given everything you know about forge @docs/Forge-analysis/analysis-report.md, and the goal for shaktra @Resources/Shaktra-Framework.docx and @docs/workflow.drawio.png - how do you propose we re-do and re-create the opinionated framework/setup using the latest claude code features - hooks, mcp, skills, sub-agents, commands, rules etc. to retain the same quality and improve while making the setup maintainable. **NOTE: WE CAN NOT LOSE THE QUALITY AND RELIABILITY FORGE PROVIDED**. Understand the core requirements for shaktra first, before doing anything, spend as much time as you want and deploy as many subagents as you want to comprehensively analyze and understand different aspects of this framework, then ask questions if there are gaps in your understanding.
+After and only after you've understood the core requirements - Create a file docs/shaktra-plan/execution-plan.md. This is a plan file, that should consist of deatiled execution and can be referenced as we go along to continue execution and maintain connection for this framework.
+
+## AFTER ABOVE
+Create a file docs/shaktra-plan/high-level.md, that captures high level details on the philosophy of building shaktra, we want to capture extremely important core details in this file, that can be loaded into memory of each claude code session, so that You (claude) knows what we are building, why, how etc.

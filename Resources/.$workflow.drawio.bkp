@@ -1,0 +1,410 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.6 Chrome/140.0.7339.249 Electron/38.8.0 Safari/537.36" version="29.3.6">
+  <diagram name="Page-1" id="XekidprStghW6oQFOOwz">
+    <mxGraphModel dx="2759" dy="1926" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Tech Program Manager&lt;/b&gt;&lt;div&gt;(Claude code Main Agent)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="520" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Software Development Manager&lt;/b&gt;&lt;div&gt;(Claude code Main Agent)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="1011" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-10" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Yb5mlycmOPglQF9R9ITN-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-51" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" target="Yb5mlycmOPglQF9R9ITN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-93" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="Yb5mlycmOPglQF9R9ITN-90">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1128" y="37" />
+              <mxPoint x="1518" y="37" />
+            </Array>
+            <mxPoint x="1127.5" y="-43" as="sourcePoint" />
+            <mxPoint x="1517.5" y="147" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-116" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" target="Yb5mlycmOPglQF9R9ITN-108">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-119" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="Yb5mlycmOPglQF9R9ITN-101">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="-210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Owner&lt;/font&gt;&lt;/b&gt;&lt;div&gt;(Human User)&lt;/div&gt;&lt;div&gt;ME&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="190" x="985" y="-110" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-5" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Shaktra Architecture&lt;/h1&gt;&lt;div&gt;&lt;b&gt;Automated Claude code Software development framework&lt;/b&gt;&lt;/div&gt;&lt;p&gt;Architecture outlines how the roles and responsibilities of this framework exists. And how the framework enables all workflows to help the user within developing software.&lt;/p&gt;" vertex="1">
+          <mxGeometry height="120" width="350" x="90" y="-363" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;" value="&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Responsibilities (High Level)&lt;/font&gt;&lt;/u&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;u&gt;&lt;br&gt;&lt;/u&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Owner&lt;/b&gt;:&lt;/div&gt;&lt;div&gt;- Overall strategy&lt;/div&gt;&lt;div&gt;- Ensure deadlines are being met&lt;/div&gt;&lt;div&gt;- Product owner&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Tech Program Manager (Claude code main agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- Principal project manager role with over 15 years cross functional experience&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Project management&lt;/div&gt;&lt;div&gt;- Coordinating with product manager&lt;/div&gt;&lt;div&gt;- Coordinating or acting as scrum master&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Software Development Manager (Claude code main agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- Senior SW Manager role with over 30 years experience&lt;/div&gt;&lt;div&gt;- Manages the core software development workflows&lt;/div&gt;&lt;div&gt;- Ensure quality deliverables&lt;/div&gt;&lt;div&gt;- Critically implement core development workflows&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Architect AGENT (Claude code sub-agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- Principal Software Architect role with over 25 yr experience&lt;/div&gt;&lt;div&gt;- Uses PRD and Architecture files to create design document&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;TPM Quality Standard AGENT (Claude code sub-agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;- &lt;/b&gt;Principal quality agent&lt;/div&gt;&lt;div&gt;- Ensure all quality and standard requirements for output artifacts are met&lt;/div&gt;&lt;div&gt;- Ensure the output artifacts are FAANG level&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;ScrumMaster AGENT (Claude code sub-agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- Senior Scrum master with over 15 years experience&lt;/div&gt;&lt;div&gt;- Performs user story creation&lt;/div&gt;&lt;div&gt;- Assigns sprints based on product manager scoping and alignment&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Senior SW Engineer (Claude code sub-agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- Principal SW Engineer role with 30 years of experience building highly scalable and reliable SW systems&lt;/div&gt;&lt;div&gt;- Plans implementations based on user stories&lt;/div&gt;&lt;div&gt;- Implementation plans consumed by Developer Agent and Test Agent for TDD workflow&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;SW Quality Standards Agent (Claude code sub-agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- Senior Quality engineer with over 30 yr experience&lt;/div&gt;&lt;div&gt;- Analyzes and reviews SW dev artifacts for FAANG quality&lt;/div&gt;&lt;div&gt;- Agent acts as a code reviewer for the code to be reviewed but has specific skillset for specific work&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Code Reviewer Agent (Claude code main agent):&lt;/b&gt;&lt;/div&gt;&lt;div&gt;- Principal code reviewer and quality skill set with over 30 years of experience&lt;/div&gt;&lt;div&gt;- Reviewing PR code and Story code&lt;/div&gt;&lt;div&gt;- Reviews independently across various domains&lt;/div&gt;&lt;div&gt;- 13 dimension review&lt;/div&gt;&lt;div&gt;- Also reviews code by real world test cases that are not in the test cases.&lt;/div&gt;&lt;div&gt;- While SW quality checks at story level, CR agent checks entire app level after each story is completed.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Codebase Analyzer Agent (Claude code main agent):&lt;/b&gt;&lt;br&gt;- Industry standard code base analyzer&lt;/div&gt;&lt;div&gt;- Extracts information that provide complete picture of codebase&lt;/div&gt;&lt;div&gt;- Extracts comprehensive information for future development context&lt;/div&gt;&lt;div&gt;- codebase analysis data is used as context by agents to quickly understand the codebase snapshot to produce coherent changes&lt;/div&gt;&lt;div&gt;- Develop mermaid diagram to be consumed by agents&lt;/div&gt;" vertex="1">
+          <mxGeometry height="830" width="720" x="-320" y="-10" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Provide&lt;div&gt;PRD + Architecture&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="110" x="681" y="-120" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-16" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Yb5mlycmOPglQF9R9ITN-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-12" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Architect AGENT" vertex="1">
+          <mxGeometry height="60" width="120" x="410" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-13" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step1: Invokes" vertex="1">
+          <mxGeometry height="30" width="60" x="470" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-15" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.multi-document;whiteSpace=wrap;" value="Comprehensive Design Doc" vertex="1">
+          <mxGeometry height="60" width="114" x="400" y="384" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-18" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="TPM&lt;div&gt;Quality Standards AGENT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="560" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-19" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=block;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step2 &amp;amp; 4: Invokes(loop max 3)" vertex="1">
+          <mxGeometry height="30" width="95" x="585" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-24" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-25" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Perform quality check" vertex="1">
+          <mxGeometry height="40" width="90" x="514" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-46" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="Yb5mlycmOPglQF9R9ITN-38">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="464" />
+              <mxPoint x="570" y="570" />
+              <mxPoint x="338" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-26" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="ScrumMaster AGENT" vertex="1">
+          <mxGeometry height="60" width="110" x="660" y="434" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-27" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-29" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step3: Invokes" vertex="1">
+          <mxGeometry height="30" width="60" x="660" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-31" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0.88;exitDx=0;exitDy=0;exitPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-26">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="457" y="514" />
+              <mxPoint x="715" y="514" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-32" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Uses Design Doc" vertex="1">
+          <mxGeometry height="30" width="90" x="460" y="516" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-48" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-65" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="Yb5mlycmOPglQF9R9ITN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-33" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.multi-document;whiteSpace=wrap;" value="User Stories" vertex="1">
+          <mxGeometry height="70" width="109" x="681" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-34" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.523;entryY=0.1;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="464" />
+              <mxPoint x="780" y="537" />
+              <mxPoint x="738" y="537" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-35" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Creates" vertex="1">
+          <mxGeometry height="30" width="60" x="720" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-36" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.792;exitY=0.9;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=blockThin;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="655" y="615" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-37" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Perform quality check" vertex="1">
+          <mxGeometry height="40" width="100" x="565" y="414" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-38" parent="1" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" value="Core Project Management" vertex="1">
+          <mxGeometry height="60" width="110" x="310" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-39" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.6;entryY=0.017;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-40" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Overall: Performs" vertex="1">
+          <mxGeometry height="30" width="60" x="410" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-41" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Product Manager AGENT" vertex="1">
+          <mxGeometry height="60" width="110" x="780" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-42" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-43" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="alignment &amp;amp;&amp;nbsp;&lt;div&gt;story scoping&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="90" x="650" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-44" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-45" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step5: Invokes" vertex="1">
+          <mxGeometry height="30" width="60" x="780" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-47" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Creates Sprints" vertex="1">
+          <mxGeometry height="30" width="90" x="424" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-49" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;dashed=1;" target="Yb5mlycmOPglQF9R9ITN-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1030" y="40" />
+              <mxPoint x="610" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-50" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Invoke for design doc, story creation and project management activities" vertex="1">
+          <mxGeometry height="30" width="170" x="640" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-52" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Invoke for core sw dev activities" vertex="1">
+          <mxGeometry height="30" width="120" x="1075" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-53" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Developer AGENT" vertex="1">
+          <mxGeometry height="60" width="100" x="1293" y="456" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-54" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Test AGENT" vertex="1">
+          <mxGeometry height="60" width="100" x="1069" y="414" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-55" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="SW Quality Standards AGENT" vertex="1">
+          <mxGeometry height="60" width="100" x="1200" y="324" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-56" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Senior SW Engineer" vertex="1">
+          <mxGeometry height="60" width="100" x="934" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-58" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step1: Invokes" vertex="1">
+          <mxGeometry height="30" width="60" x="972.5" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-59" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.multi-document;whiteSpace=wrap;" value="Comprehensive implementation&lt;div&gt;plan&lt;/div&gt;" vertex="1">
+          <mxGeometry height="76" width="128" x="920" y="504" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-60" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-61" parent="1" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.flowchart.parallel_mode;pointerEvents=1" value="" vertex="1">
+          <mxGeometry height="40" width="95" x="1032.5" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-62" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-63" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Individual story or multiple independent stories, parallel execution" vertex="1">
+          <mxGeometry height="30" width="240" x="1070" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-64" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-66" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Consumes" vertex="1">
+          <mxGeometry height="30" width="60" x="930" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-67" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=blockThin;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-54">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="357" />
+              <mxPoint x="1090" y="357" />
+              <mxPoint x="1090" y="414" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-68" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step3: Invokes" vertex="1">
+          <mxGeometry height="30" width="60" x="1040" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-69" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-70" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="consume" vertex="1">
+          <mxGeometry height="30" width="50" x="1000" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-71" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-54">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="615" />
+              <mxPoint x="860" y="444" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-72" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.multi-document;whiteSpace=wrap;" value="Test files&lt;div&gt;TDD (RED phase)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="88" x="1075" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-73" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-74" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=blockThin;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-55">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-76" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step2,4 &amp;amp; 6: Invokes&lt;div&gt;(loop max 3)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="90" x="1250" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-77" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-72">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1183" y="354" />
+              <mxPoint x="1183" y="645" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-78" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-59">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1250" y="542" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-79" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="review" vertex="1">
+          <mxGeometry height="30" width="60" x="1200" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-80" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="review" vertex="1">
+          <mxGeometry height="30" width="60" x="1150" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-81" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-53">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1100" y="390" />
+              <mxPoint x="1343" y="390" />
+            </Array>
+            <mxPoint x="1340" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-82" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Step5: Invokes" vertex="1">
+          <mxGeometry height="30" width="60" x="1090" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-83" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.multi-document;whiteSpace=wrap;" value="Source files&lt;div&gt;TDD&lt;/div&gt;&lt;div&gt;GREEN Phase&lt;/div&gt;&lt;div&gt;(implementation)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="124" x="1260" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-84" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-83">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-85" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-53">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1169" y="520" />
+              <mxPoint x="1169" y="486" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-86" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.145;entryY=0.855;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-90" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;b&gt;Codebase Analyzer&lt;/b&gt;&lt;/div&gt;&lt;div&gt;(Claude code Main Agent)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="120" x="1457.5" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-91" parent="1" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.flowchart.parallel_mode;pointerEvents=1" value="" vertex="1">
+          <mxGeometry height="40" width="95" x="1470" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-92" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-91">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-94" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Invoke for codebase analysis" vertex="1">
+          <mxGeometry height="30" width="120" x="1400" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-95" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Analyzer&lt;div&gt;AGENT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="100" x="1467.5" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-96" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="multiple aspects of codebase analysis spawned parallel" vertex="1">
+          <mxGeometry height="51" width="110" x="1524" y="219" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-97" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-91" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-95">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-107" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="Yb5mlycmOPglQF9R9ITN-106">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-98" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.multi-document;whiteSpace=wrap;" value="Comprehensive Codebase Analysis" vertex="1">
+          <mxGeometry height="84" width="140" x="1447.5" y="516" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-100" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.24;entryY=-0.039;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-83">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1270" y="630" />
+              <mxPoint x="1290" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-101" parent="1" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;" value="General Purpose AGENT" vertex="1">
+          <mxGeometry height="60" width="100" x="1338.5" y="-240" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-102" parent="1" style="shape=tape;whiteSpace=wrap;html=1;strokeWidth=2;size=0.19" value="AWS Specialist Skills" vertex="1">
+          <mxGeometry height="65" width="100" x="1502.5" y="-243" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-103" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="General purpose agnet used by injecting specific skills for different work" vertex="1">
+          <mxGeometry height="70" width="220" x="1282.5" y="-300" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-105" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="Yb5mlycmOPglQF9R9ITN-98">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1430" y="175" />
+              <mxPoint x="1430" y="558" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-106" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="Mermaid diagram&lt;div&gt;key connections&lt;/div&gt;&lt;div&gt;etc....&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="180" x="1490" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-108" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;b&gt;Code Reviewer&lt;/b&gt;&lt;/div&gt;&lt;div&gt;(Claude code Main Agent)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="120" x="1698" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-109" parent="1" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.flowchart.parallel_mode;pointerEvents=1" value="" vertex="1">
+          <mxGeometry height="40" width="95" x="1710.5" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-110" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="multiple aspects of code quality analysis spawned parallel" vertex="1">
+          <mxGeometry height="51" width="130" x="1800" y="219" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-111" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-109">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-112" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Analyzer&lt;div&gt;AGENT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="100" x="1708.5" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-113" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-109" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" target="Yb5mlycmOPglQF9R9ITN-112">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-114" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" value="Code Review Information" vertex="1">
+          <mxGeometry height="100" width="80" x="1653" y="439" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-115" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=25;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-114">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1678" y="175" />
+              <mxPoint x="1678" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-117" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Invoke for code review for PRs and dev" vertex="1">
+          <mxGeometry height="50" width="120" x="1632" y="-70" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-118" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="Yb5mlycmOPglQF9R9ITN-102">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-120" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Invoke on demand" vertex="1">
+          <mxGeometry height="30" width="60" x="1127.5" y="-243" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-121" parent="1" style="shape=tape;whiteSpace=wrap;html=1;strokeWidth=2;size=0.19" value="Statistical Analysis Skills" vertex="1">
+          <mxGeometry height="65" width="100" x="1502.5" y="-169" as="geometry" />
+        </mxCell>
+        <mxCell id="Yb5mlycmOPglQF9R9ITN-122" edge="1" parent="1" source="Yb5mlycmOPglQF9R9ITN-101" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="Yb5mlycmOPglQF9R9ITN-121">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
