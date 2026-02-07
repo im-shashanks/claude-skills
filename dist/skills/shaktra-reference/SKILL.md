@@ -38,7 +38,8 @@ Agents load this skill via their `skills` frontmatter. Only load the sub-files y
 | SW Quality, Code Reviewer | severity-taxonomy, quality-principles, quality-dimensions, schemas/handoff-schema, schemas/decisions-schema |
 | SW Engineer, Developer | severity-taxonomy, quality-principles, guard-tokens, schemas/handoff-schema, schemas/story-schema |
 | Test Agent | severity-taxonomy, guard-tokens, schemas/handoff-schema |
-| TPM Quality, Scrum Master | story-tiers, guard-tokens, schemas/sprint-schema, schemas/story-schema |
+| TPM Quality | severity-taxonomy, quality-dimensions, story-tiers, guard-tokens, schemas/design-doc-schema, schemas/story-schema |
+| Scrum Master | story-tiers, guard-tokens, schemas/sprint-schema, schemas/story-schema |
 | Architect | quality-principles, quality-dimensions, schemas/design-doc-schema, schemas/story-schema |
 | Memory Curator | schemas/lessons-schema, schemas/handoff-schema |
-| Product Manager | story-tiers, schemas/story-schema |
+| Product Manager | story-tiers, schemas/story-schema, schemas/decisions-schema, schemas/sprint-schema |
