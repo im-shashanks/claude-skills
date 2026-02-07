@@ -40,8 +40,10 @@ The auto-detected tier is a suggestion. The user or TPM can override it explicit
 
 ## Check Depth Definitions
 
-**Quick (~15 checks):** High-impact checks only — P0 triggers across all dimensions, critical error handling, security basics. Used for Trivial and Small tiers.
+Check depth controls **review scope**, not check loading. All ~35 checks from `shaktra-quality/quick-check.md` are always loaded regardless of tier. Depth determines how findings are treated and whether comprehensive review runs.
 
-**Full (~35 checks):** Quick checks plus maintainability, observability, testing completeness, and configuration review. Used for Medium tier.
+**Quick (Trivial/Small):** sw-quality runs quick-check only. All ~35 checks loaded, but P2+ findings are reported as observations, not blockers. No comprehensive review phase.
 
-**Thorough (full + expanded):** Full checks plus architecture impact analysis, performance profiling review, dependency audit, and cross-cutting concern validation. Used for Large tier.
+**Full (Medium):** sw-quality runs quick-check at each TDD gate + comprehensive review (dimensions A-M + N) at QUALITY phase. Standard severity enforcement — P0 blocks, P1 threshold applies, P2 reported.
+
+**Thorough (Large):** Full depth + expanded comprehensive review with architecture impact analysis, performance profiling review, dependency audit, and cross-cutting concern validation.

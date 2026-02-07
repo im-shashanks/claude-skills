@@ -1,4 +1,4 @@
-# Phase 5 — SDM Workflow & TDD Pipeline
+# Phase 5 — SDM Workflow & TDD Pipeline[COMPLETE]
 
 > **Context Required:** Read [architecture-overview.md](../architecture-overview.md) before starting.
 > **Depends on:** Phase 2 (Reference System), Phase 3 (State Schemas)
@@ -19,10 +19,10 @@ Build the core development workflow: Software Development Manager orchestrating 
 | `skills/shaktra-dev/tdd-pipeline.md` | ~200 | Step-by-step TDD orchestration template |
 | `skills/shaktra-tdd/SKILL.md` | ~100 | TDD knowledge manifest |
 | `skills/shaktra-tdd/testing-practices.md` | ~200 | Test writing guide, behavioral testing, patterns |
-| `skills/shaktra-tdd/coding-practices.md` | ~200 | Implementation guide, patterns, anti-patterns |
+| `skills/shaktra-tdd/coding-practices.md` | ~200 | Implementation guide, patterns, anti-patterns, security/observability/resilience essentials |
 | `skills/shaktra-quality/SKILL.md` | ~100 | Quality engine manifest |
 | `skills/shaktra-quality/quick-check.md` | ~200 | ~35 high-impact checks for TDD gates |
-| `skills/shaktra-quality/comprehensive-review.md` | ~200 | Full 13-dimension review template |
+| `skills/shaktra-quality/comprehensive-review.md` | ~200 | Full 13-dimension (A-M) + Dimension N (plan adherence) review template |
 
 ## Deliverables — Agents
 
@@ -72,6 +72,16 @@ SDM Skill (main thread):
 
   5. Detect current phase from handoff (or start fresh)
 
+  GUARD TOKEN ENFORCEMENT:
+    The SDM orchestrator and sw-quality agent emit guard tokens from
+    shaktra-reference/guard-tokens.md at phase transitions:
+    - TESTS_NOT_RED — if test suite passes before implementation begins → block GREEN
+    - TESTS_NOT_GREEN — if tests still failing after implementation → block QUALITY
+    - COVERAGE_GATE_FAILED — if coverage below tier threshold → block QUALITY
+    - PHASE_GATE_FAILED — if a phase transition guard fails → block next phase
+    - CHECK_PASSED / CHECK_BLOCKED — after each quality gate
+    - MAX_LOOPS_REACHED — if fix loop exhausted → escalate to user
+
   Phase: PLAN
     a. Spawn shaktra-sw-engineer → Implementation Plan + Test Plan (unified)
        - Engineer reads story, creates comprehensive plan
@@ -94,6 +104,11 @@ SDM Skill (main thread):
        - MUST use exact test names from story's test_specs
        - Tests must be behavioral (assert outcomes, not mock.called)
        - All tests must fail initially (RED state)
+       - RED validation: Tests must fail for VALID reasons —
+         ImportError, AttributeError, NotImplementedError (code doesn't exist yet).
+         If tests fail for INVALID reasons (SyntaxError, TypeError, NameError in
+         test file itself), the test is broken and must be fixed before proceeding.
+         The test agent verifies failure reasons before reporting all_tests_red: true.
        - Update handoff: test_summary.all_tests_red = true
     b. Spawn shaktra-sw-quality → Review Tests (max 3 loops)
        - Check: behavioral assertions, error path coverage, no over-mocking
@@ -114,7 +129,13 @@ SDM Skill (main thread):
 
   Phase: QUALITY (Final)
     a. Spawn shaktra-sw-quality → Comprehensive Review
-       - Full 13-dimension review
+       - Full 13-dimension review (A-M) + Dimension N: Plan Adherence
+       - Dimension N verifies implementation matches the plan:
+         * Components built match plan_summary.components
+         * Patterns applied as plan_summary.patterns_applied
+         * Scope risks from plan_summary.scope_risks were mitigated
+         * Deviations documented in code_summary with justification
+         * Missing risk prevention → P0; Pattern not applied → P1; Component differs → P2
        - Verification: run actual tests, check coverage
        - Decision consolidation: promote important_decisions to decisions.yml
     b. Update handoff: completed_phases: [plan, tests, code, quality]
@@ -138,7 +159,10 @@ Two modes, one engine — solving Forge's quadruple overlap:
 
 **QUICK_CHECK (during TDD gates):**
 - ~35 highest-impact checks organized by severity
-- Always load ALL ~35 checks regardless of tier (no tier-aware loading — risk of missing checks outweighs token savings)
+- Always load ALL ~35 checks regardless of tier. Check depth controls REVIEW SCOPE, not check loading:
+  - Quick (Trivial/Small): sw-quality runs quick-check only. All ~35 checks loaded, but P2+ findings are observations, not blockers.
+  - Full (Medium): sw-quality runs quick-check at gates + comprehensive review at QUALITY phase.
+  - Thorough (Large): Full + expanded comprehensive review with architecture impact analysis, performance profiling review, dependency audit.
 - Max 3 fix loops per gate
 - Focus areas by gate:
   - Plan gate: Architecture soundness, test strategy quality, missed edge cases
@@ -151,25 +175,57 @@ Two modes, one engine — solving Forge's quadruple overlap:
 - Decision consolidation (extract decisions from development, promote to memory)
 - Cross-story consistency check (does this fit with prior decisions?)
 
-**Checks to port from Forge (highest value):**
+**Complete ~35 Checks by Gate:**
 
-| Check | Severity | Gate | Why It Matters |
-|-------|----------|------|---------------|
-| Error path coverage | P0 | Test | LLMs skip error paths entirely |
-| External calls have timeouts | P0 | Code | Missing timeouts = production cascading failures |
-| No hardcoded credentials | P0 | Code | Security incident if shipped |
-| Bounded user input operations | P0 | Code | Prevents DoS via unbounded loops |
-| Hallucinated imports | P0 | Code | LLMs invent library names |
-| Missing input validation | P0 | Code | User input to eval/SQL/system calls |
-| No mock-only assertions | P1 | Test | `mock.called` tests prove nothing |
-| Placeholder logic | P1 | Code | TODO/NotImplementedError in critical paths |
-| Generic error messages | P1 | Code | `raise Exception("Failed")` is undebuggable |
-| No over-mocking | P1 | Test | Tests with 5+ mocks test nothing real |
-| Test isolation | P1 | Test | Shared state = flaky suites |
-| No exception swallowing | P1 | Code | `except: pass` hides real failures |
-| Cyclomatic complexity | P2 | Code | Functions with 10+ branches untestable |
-| Over-commenting | P2 | Code | `# Import requests` above `import requests` |
-| Tests mirror implementation | P2 | Test | Tests that copy code structure break on refactor |
+**Plan Gate (5 checks — Medium+ tiers only):**
+
+| # | Check | Sev | Why |
+|---|---|---|---|
+| PL-01 | AC ↔ test plan mapping complete | P1 | Every acceptance criterion must have planned tests |
+| PL-02 | Error handling codes all have test plans | P1 | LLMs skip error paths entirely if not planned |
+| PL-03 | Failure mode analysis present (integration/security/data scope) | P1 | External call resilience, partial failure, concurrent access |
+| PL-04 | Scope-specific risks identified | P2 | Integration: timeouts/retry; Security: validation/auth; Data: transactions |
+| PL-05 | Implementation order minimizes coupling | P2 | Wrong order = cascading rework |
+
+**Test Gate (13 checks):**
+
+| # | Check | Sev | Why |
+|---|---|---|---|
+| TQ-01 | Error path coverage — all error codes from story have tests | P0 | LLMs skip error paths entirely |
+| TQ-02 | No mock-only assertions (`mock.called` proves nothing) | P1 | Tests prove behavior, not wiring |
+| TQ-03 | No over-mocking — mock count < real assertion count | P1 | 5+ mocks = testing nothing real |
+| TQ-04 | Test isolation — no shared mutable state between tests | P1 | Shared state = flaky suites |
+| TQ-05 | No flickering tests — no real `time`/`random`/`datetime.now()` | P1 | Non-deterministic = unreliable CI |
+| TQ-06 | No empty assertions — every test has >= 1 meaningful assert | P1 | LLMs generate assertion-free tests frequently |
+| TQ-07 | Mock at boundaries only — external APIs/DBs/filesystems, not internals | P1 | Internal mocks break on every refactor |
+| TQ-08 | Invariant coverage — business invariants tested positive + negative | P1 | Invariants are the contract; untested = unverified |
+| TQ-09 | Happy path coverage — AC scenarios from io_examples have tests | P1 | Core behavior must be tested, not just edges |
+| TQ-10 | Specific exception assertions (not bare `pytest.raises(Exception)`) | P2 | Generic catches verify nothing useful |
+| TQ-11 | Tests verify behavior, not structure (refactor-safe) | P2 | Tests coupling to internals break on any change |
+| TQ-12 | Negative test ratio >= 30% of total | P2 | LLMs bias toward happy paths |
+| TQ-13 | Descriptive test names (given/when/then or behavior-based) | P2 | Tests are documentation; names must convey intent |
+
+**Code Gate (17 checks):**
+
+| # | Check | Sev | Why |
+|---|---|---|---|
+| CQ-01 | Hallucinated imports — all imports exist in stdlib/deps/project | P0 | Code won't run |
+| CQ-02 | Missing input validation — user input to queries/commands/eval | P0 | Injection vulnerability |
+| CQ-03 | External calls have timeouts | P0 | Missing timeout = cascading production failure |
+| CQ-04 | No hardcoded credentials/secrets | P0 | Security incident if shipped |
+| CQ-05 | Bounded user input operations — no unbounded loops/joins on input | P0 | DoS via resource exhaustion |
+| CQ-06 | Placeholder logic — TODO/NotImplementedError in execution paths | P1 | Incomplete code shipped as if complete |
+| CQ-07 | Generic error messages — `raise Exception("Failed")` | P1 | Undebuggable in production |
+| CQ-08 | No exception swallowing — `except: pass` hides real failures | P1 | Silent failures = corrupt state |
+| CQ-09 | Error classification — retryable vs permanent distinguished | P1 | Without classification, no retry logic is possible |
+| CQ-10 | Copy-paste errors — duplicated blocks with variable name mismatches | P1 | LLMs duplicate with subtle name bugs |
+| CQ-11 | Code duplication > 10% — DRY violations | P1 | Duplicated logic = duplicated bugs |
+| CQ-12 | Nesting depth > 4 levels | P1 | Deep nesting = untestable, unreadable code |
+| CQ-13 | Cyclomatic complexity > 10 per function | P2 | High-branch functions are untestable |
+| CQ-14 | Generic naming — `process()`, `handle()`, `data`, `result` | P2 | LLM defaults; reveals no intent |
+| CQ-15 | Magic numbers/strings without named constants | P2 | Hardcoded values obscure meaning |
+| CQ-16 | SATD — TODO/FIXME/HACK/"temporary"/"quick fix" in code | P2 | Self-admitted tech debt left in production |
+| CQ-17 | God functions / SRP violations | P2 | If name contains "and", split it |
 
 ## Memory Curator Agent Usage
 
@@ -198,6 +254,14 @@ Shared across all main workflows. Agent file delivered in Phase 3; detailed usag
 - [ ] Memory curator captures nothing for routine sessions (zero entries is valid)
 - [ ] Fix loops cap at 3 per gate
 - [ ] Gate activation varies by tier (Small skips plan gate) but all checks always loaded
+- [ ] Guard tokens emitted at every phase transition
+- [ ] RED phase validates failure reasons (valid vs invalid)
+- [ ] Plan adherence (Dimension N) checked in comprehensive review
+- [ ] Coding practices include security, observability, resilience sections
+- [ ] Quick-check has exactly ~35 checks with IDs, severities, and gates
+- [ ] AI Slop checks explicitly represented: CQ-01, CQ-06, CQ-14, CQ-16, CQ-17
+- [ ] Tech Debt checks explicitly represented: CQ-03-05, CQ-08-12, CQ-13
+- [ ] Maintainability checks explicitly represented: CQ-13-17, TQ-11-13
 - [ ] No content duplication between quality skill and reference skill
 - [ ] All files under 300 lines (check every file)
 
