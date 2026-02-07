@@ -1,4 +1,4 @@
-# Phase 8 — General Purpose Agent
+# Phase 8 — General Purpose Agent [COMPLETE]
 
 > **Context Required:** Read [architecture-overview.md](../architecture-overview.md) before starting.
 > **Depends on:** Phase 1 (Foundation). Standalone workflow — lowest priority.
