@@ -20,7 +20,7 @@ This skill provides the review checklists and processes used by the sw-quality a
 
 This skill never restates severity definitions or quality dimension frameworks â€” it references them.
 
-## Two Modes, One Engine
+## Modes
 
 ### QUICK_CHECK (TDD Gate Reviews)
 
@@ -37,6 +37,13 @@ This skill never restates severity definitions or quality dimension frameworks â
 - Decision consolidation: extract `important_decisions` from handoff, promote to `decisions.yml`
 - Cross-story consistency: compare decisions against existing `decisions.yml`
 - Defined in `comprehensive-review.md`
+
+### REFACTOR_VERIFY (Refactoring Verification)
+
+- Confirms refactoring preserved behavior and improved quality
+- Verifies: all tests green, coverage not decreased, no new P0/P1, smell count reduced
+- For structural tier: additionally checks architecture boundaries and circular dependencies
+- Emits `REFACTOR_PASS` or `REFACTOR_BLOCKED`
 
 ## Gate Logic
 
@@ -63,6 +70,8 @@ Max fix loops: 3 per gate. After 3 failed attempts, emit `MAX_LOOPS_REACHED` and
 |---|---|
 | `quick-check.md` | 36 checks with IDs, severities, gates, detection guidance, and examples |
 | `comprehensive-review.md` | Full 14-dimension review process with plan adherence and decision consolidation |
+| `performance-data-checks.md` | Performance and data layer checks (PG-01 through PG-06, DL-01 through DL-05) |
+| `security-checks.md` | Security checks aligned with OWASP Top 10 (SE-01 through SE-12, ST-01 through ST-03) |
 
 ## References
 

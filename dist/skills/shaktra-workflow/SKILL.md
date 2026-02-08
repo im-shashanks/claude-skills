@@ -19,7 +19,8 @@ Classify intent using a **noun-first, two-signal model**. Shaktra-specific nouns
 | Route | Noun Signals | Verb Signals | Target |
 |---|---|---|---|
 | TPM | design doc, architecture, PRD, stories (creation context), sprint, backlog, feature (planning context), hotfix, enrich | plan, design, create, break down, enrich, prioritize | `/shaktra:tpm` |
-| Dev | ST-### (without "review"), tests (writing context), code, implementation, bug, TDD | develop, implement, build, code, write, fix, resume | `/shaktra:dev` |
+| Bug Fix | bug, bugfix, debug, diagnose (code context), error message, stack trace, "why does this fail" | debug, diagnose, fix (with bug noun), investigate | `/shaktra:bugfix` |
+| Dev | ST-### (without "review"), tests (writing context), code, implementation, TDD | develop, implement, build, code, write, resume | `/shaktra:dev` |
 | Review | PR, pull request, PR #/URL, "review" + ST-### | review (with PR/story noun) | `/shaktra:review` |
 | Analyze | codebase, brownfield, analysis, dimension names (architecture, practices, dependencies, tech-debt, data-flows, critical-paths, domain-model, entry-points) | analyze (codebase context) | `/shaktra:analyze` |
 | Init | "initialize", "set up shaktra", "init" | init, initialize, set up | `/shaktra:init` |
@@ -35,7 +36,7 @@ When multiple routes match, resolve in this order:
 1. **Story ID + "review"** → Review (e.g., "review ST-001")
 2. **Story ID** (without "review") → Dev (e.g., "implement ST-001")
 3. **PR reference** (#number, PR URL, "pull request") → Review
-4. **Utility match** ("init", "initialize", "set up shaktra") → Init; ("doctor", "health", "diagnose") → Doctor
+4. **Utility match** ("init", "initialize", "set up shaktra") → Init; ("doctor", "health") → Doctor
 5. **Noun match** → per route table; noun beats verb
 6. **Verb-only match** (no Shaktra noun) → confirm with user before routing
 7. **No match** → General
@@ -43,7 +44,9 @@ When multiple routes match, resolve in this order:
 Key overlap resolutions:
 - "review the design" → TPM (noun "design" outranks verb "review")
 - "analyze the PR" → Review (noun "PR" outranks verb "analyze")
-- "fix this bug" → Dev (noun "bug" → Dev; TPM only when "hotfix" is explicit)
+- "fix this bug" → Bug Fix (noun "bug" → Bug Fix; TPM only when "hotfix" is explicit)
+- "diagnose this bug" → Bug Fix (noun "bug" outranks "diagnose" for Doctor)
+- "diagnose" (alone, no code context) → Doctor (framework health context)
 - "plan the sprint" → TPM (both noun "sprint" and verb "plan" point to TPM)
 
 ---
@@ -86,7 +89,8 @@ When invoked with no request text (just `/shaktra:workflow`), present available 
 | Workflow | Command | Use When |
 |---|---|---|
 | Planning | `/shaktra:tpm` | Design docs, user stories, sprint planning |
-| Development | `/shaktra:dev` | TDD implementation, bug fixes |
+| Bug Fix | `/shaktra:bugfix` | Bug diagnosis, root cause analysis, fix via TDD |
+| Development | `/shaktra:dev` | TDD implementation of stories |
 | Code Review | `/shaktra:review` | PR reviews, app-level review |
 | Analysis | `/shaktra:analyze` | Brownfield codebase analysis |
 | General | `/shaktra:general` | Domain expertise, architectural guidance |

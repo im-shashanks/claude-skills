@@ -19,22 +19,22 @@ Checks the installed plugin at `${CLAUDE_PLUGIN_ROOT}`.
 
 ### Check 1 — Agent Files
 
-Glob `${CLAUDE_PLUGIN_ROOT}/agents/*.md`. Verify all 11 agent files exist and each has valid YAML frontmatter (opening and closing `---` with at least `name` field).
+Glob `${CLAUDE_PLUGIN_ROOT}/agents/*.md`. Verify all 12 agent files exist and each has valid YAML frontmatter (opening and closing `---` with at least `name` field).
 
 **Expected agents:**
-shaktra-architect, shaktra-cba-analyzer, shaktra-cr-analyzer, shaktra-developer, shaktra-memory-curator, shaktra-product-manager, shaktra-scrummaster, shaktra-sw-engineer, shaktra-sw-quality, shaktra-test-agent, shaktra-tpm-quality
+shaktra-architect, shaktra-bug-diagnostician, shaktra-cba-analyzer, shaktra-cr-analyzer, shaktra-developer, shaktra-memory-curator, shaktra-product-manager, shaktra-scrummaster, shaktra-sw-engineer, shaktra-sw-quality, shaktra-test-agent, shaktra-tpm-quality
 
-PASS: All 11 files exist with valid frontmatter.
+PASS: All 12 files exist with valid frontmatter.
 FAIL: List missing files or files with invalid frontmatter.
 
 ### Check 2 — Skill Directories
 
-Glob `${CLAUDE_PLUGIN_ROOT}/skills/*/SKILL.md`. Verify all 12 skill directories exist and each SKILL.md has valid YAML frontmatter (opening and closing `---` with at least `name` and `description` fields).
+Glob `${CLAUDE_PLUGIN_ROOT}/skills/*/SKILL.md`. Verify all 13 skill directories exist and each SKILL.md has valid YAML frontmatter (opening and closing `---` with at least `name` and `description` fields).
 
 **Expected skills:**
-shaktra-analyze, shaktra-dev, shaktra-doctor, shaktra-general, shaktra-init, shaktra-quality, shaktra-reference, shaktra-review, shaktra-stories, shaktra-tdd, shaktra-tpm, shaktra-workflow
+shaktra-analyze, shaktra-bugfix, shaktra-dev, shaktra-doctor, shaktra-general, shaktra-init, shaktra-quality, shaktra-reference, shaktra-review, shaktra-stories, shaktra-tdd, shaktra-tpm, shaktra-workflow
 
-PASS: All 12 skill SKILL.md files exist with valid frontmatter.
+PASS: All 13 skill SKILL.md files exist with valid frontmatter.
 FAIL: List missing skills or invalid frontmatter.
 
 ### Check 3 — Hook Scripts
@@ -64,7 +64,7 @@ Checks the `.shaktra/` directory in the current working directory.
 
 ### Check 5 — Settings File
 
-Read `.shaktra/settings.yml`. Verify it exists and contains the required top-level sections: `project`, `tdd`, `quality`, `review`, `analysis`, `sprints`.
+Read `.shaktra/settings.yml`. Verify it exists and contains the required top-level sections: `project`, `tdd`, `quality`, `review`, `analysis`, `refactoring`, `sprints`.
 
 Within `project`, verify these fields are present and non-empty: `name`, `type`, `language`.
 
@@ -122,8 +122,8 @@ Present results as a structured report:
 ## Shaktra Doctor Report
 
 ### Category 1: Plugin Structure
-- [PASS] Check 1 — Agent Files: 11/11 agents found with valid frontmatter
-- [PASS] Check 2 — Skill Directories: 12/12 skills found with valid frontmatter
+- [PASS] Check 1 — Agent Files: 12/12 agents found with valid frontmatter
+- [PASS] Check 2 — Skill Directories: 13/13 skills found with valid frontmatter
 - [PASS] Check 3 — Hook Scripts: 4/4 scripts found and executable
 - [PASS] Check 4 — Sub-File References: All references resolve
 

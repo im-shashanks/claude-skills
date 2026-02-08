@@ -52,10 +52,10 @@ After any workflow completes, present a structured summary (see Completion Repor
 
 | Agent | Model | Skills Loaded | Spawned By |
 |---|---|---|---|
-| shaktra-architect | opus | shaktra-reference | Design workflows |
+| shaktra-architect | opus | shaktra-reference, shaktra-tdd | Design workflows |
 | shaktra-product-manager | sonnet | shaktra-reference | Gap answering, RICE, coverage |
 | shaktra-scrummaster | sonnet | shaktra-stories, shaktra-reference | Story creation/enrichment |
-| shaktra-tpm-quality | sonnet | shaktra-reference | Quality review loops |
+| shaktra-tpm-quality | sonnet | shaktra-reference, shaktra-tdd | Quality review loops |
 | shaktra-memory-curator | haiku | shaktra-reference | End of every workflow |
 
 ---

@@ -30,6 +30,7 @@ Agents load this skill via their `skills` frontmatter. Only load the sub-files y
 | `schemas/lessons-schema.md` | Lessons learned — 5 fields, capture bar, archival rule |
 | `schemas/sprint-schema.md` | Sprint state — velocity tracking, backlog |
 | `schemas/design-doc-schema.md` | Design doc sections — tier-scaled structure |
+| `schemas/refactoring-handoff-schema.md` | Refactoring state machine — phases, transitions, baseline metrics |
 
 ## Agent Loading Guide
 
@@ -42,4 +43,6 @@ Agents load this skill via their `skills` frontmatter. Only load the sub-files y
 | Scrum Master | story-tiers, guard-tokens, schemas/sprint-schema, schemas/story-schema |
 | Architect | quality-principles, quality-dimensions, schemas/design-doc-schema, schemas/story-schema |
 | Memory Curator | schemas/lessons-schema, schemas/handoff-schema |
+| Bug Diagnostician | severity-taxonomy, guard-tokens, schemas/story-schema |
+| CBA Analyzer | quality-principles, schemas/decisions-schema |
 | Product Manager | story-tiers, schemas/story-schema, schemas/decisions-schema, schemas/sprint-schema |

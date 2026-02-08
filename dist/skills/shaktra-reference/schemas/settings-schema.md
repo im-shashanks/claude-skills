@@ -31,6 +31,11 @@ analysis:
   summary_token_budget: integer  # default: 600 — max tokens per artifact summary section
   incremental_refresh: boolean   # default: true — enable checksum-based incremental refresh
 
+refactoring:
+  safety_threshold: integer              # default: 80 — min coverage % before targeted refactoring
+  structural_safety_threshold: integer   # default: 90 — min coverage % before structural refactoring
+  max_characterization_tests: integer    # default: 20 — max tests added during FORTIFY phase
+
 sprints:
   enabled: boolean              # default: true
   velocity_tracking: boolean    # default: true
@@ -53,6 +58,9 @@ sprints:
 | `review.min_verification_tests` | code-reviewer |
 | `analysis.summary_token_budget` | cba-analyzer, analyze skill (validation) |
 | `analysis.incremental_refresh` | analyze skill (refresh workflow) |
+| `refactoring.safety_threshold` | sw-quality (REFACTOR_VERIFY), test-agent (characterization mode) |
+| `refactoring.structural_safety_threshold` | sw-quality (REFACTOR_VERIFY), test-agent (characterization mode) |
+| `refactoring.max_characterization_tests` | test-agent (characterization mode) |
 | `sprints.enabled` | scrummaster, tpm-quality |
 | `sprints.velocity_tracking` | scrummaster |
 | `sprints.sprint_duration_weeks` | scrummaster |

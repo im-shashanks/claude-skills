@@ -3,6 +3,7 @@ name: shaktra-architect
 model: opus
 skills:
   - shaktra-reference
+  - shaktra-tdd
 tools:
   - Read
   - Write

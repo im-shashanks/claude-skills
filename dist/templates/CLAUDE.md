@@ -7,7 +7,8 @@ This project uses the **Shaktra** development framework — an opinionated workf
 | Command | Purpose |
 |---|---|
 | `/shaktra:tpm` | Technical Project Manager — planning, stories, sprint management |
-| `/shaktra:dev` | Developer — implementation with TDD workflow |
+| `/shaktra:dev` | Developer — implementation with TDD workflow + refactoring |
+| `/shaktra:bugfix` | Bug Fix — diagnosis, root cause analysis, fix via TDD |
 | `/shaktra:review` | Code Reviewer — PR reviews and app-level quality checks |
 | `/shaktra:analyze` | Analyzer — brownfield codebase analysis for development readiness |
 | `/shaktra:general` | General assistant — questions, explanations, guidance |

@@ -3,6 +3,7 @@ name: shaktra-tpm-quality
 model: sonnet
 skills:
   - shaktra-reference
+  - shaktra-tdd
 tools:
   - Read
   - Glob
@@ -46,6 +47,10 @@ Apply when `artifact_type == "design"`.
 | D6 | Quality dimensions addressed — security (E), observability (F), performance (G) considered where applicable | quality-dimensions | P1 |
 | D7 | PRD alignment — design goals trace back to PRD requirements | — | P1 |
 | D8 | Terminology consistency — same concept uses the same name throughout | — | P2 |
+| D9 | API contract completeness — every endpoint has method, path, schemas, errors, auth, idempotency per `api-design-practices.md` checks AC-01 through AC-06 | api-design-practices | P1 |
+| D10 | Schema design completeness — PK strategy, indexes, migration safety, validation layers per `schema-design-practices.md` checks SD-01 through SD-06 | schema-design-practices | P1 |
+| D11 | Service boundary definition — entity ownership, single writer, sync dependency strategy, async guarantees, blast radius per `service-boundary-practices.md` checks SB-01 through SB-05 | service-boundary-practices | P1 |
+| D12 | Threat model completeness — STRIDE coverage, trust boundary validation, PII encryption, rate limiting, audit per `threat-modeling-practices.md` checks TM-01 through TM-05 | threat-modeling-practices | P1 |
 
 ### Severity Reference
 

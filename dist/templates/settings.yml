@@ -24,6 +24,11 @@ analysis:
   summary_token_budget: 600   # max tokens per artifact summary section
   incremental_refresh: true   # enable checksum-based incremental refresh
 
+refactoring:
+  safety_threshold: 80              # min coverage % before targeted refactoring
+  structural_safety_threshold: 90   # min coverage % before structural refactoring
+  max_characterization_tests: 20    # max tests added during FORTIFY phase
+
 sprints:
   enabled: true
   velocity_tracking: true

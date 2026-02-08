@@ -17,8 +17,11 @@ Classify the user's request into one of these intents:
 |---|---|---|
 | `develop` | "develop story", "implement", "build", "code", story ID reference | TDD Pipeline |
 | `resume` | "resume", "continue", "pick up where", story ID + existing handoff | TDD Pipeline (resume) |
+| `refactor` | "refactor", "clean up", "restructure", "extract", "simplify" + file/module path | Refactoring Pipeline |
 
-If the intent is ambiguous or no story ID is provided, ask the user to specify the story.
+If the intent is `develop` or `resume` and no story ID is provided, ask the user to specify the story.
+
+If the intent is `refactor`, route to `refactoring-pipeline.md`. The refactoring workflow does not require a story — it operates directly on a file or module path.
 
 ## Execution Flow
 
@@ -265,3 +268,6 @@ This workflow emits and responds to:
 - `MAX_LOOPS_REACHED` — fix loop exhausted → escalate to user
 - `VALIDATION_FAILED` — story or handoff validation failure
 - `CLARIFICATION_NEEDED` — agent needs user input
+- `REFACTOR_PASS` / `REFACTOR_BLOCKED` — refactoring verification results
+- `TRANSFORM_REVERTED` — refactoring transformation rolled back
+- `FORCE_MODE_ACTIVE` — refactoring with acknowledged risk

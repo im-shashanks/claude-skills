@@ -22,7 +22,7 @@ Review artifacts at every quality gate during the TDD pipeline. You inspect — 
 ## Input Contract
 
 You receive:
-- `review_mode`: "PLAN_REVIEW" | "QUICK_CHECK" | "COMPREHENSIVE"
+- `review_mode`: "PLAN_REVIEW" | "QUICK_CHECK" | "COMPREHENSIVE" | "REFACTOR_VERIFY"
 - `artifact_paths`: list of file paths to review
 - `gate`: "plan" | "test" | "code" (for QUICK_CHECK mode)
 - `handoff_path`: path to `handoff.yml`
@@ -55,13 +55,15 @@ Output: Qualitative findings — severity, issue, guidance. No check IDs.
 
 Process:
 1. Read `quick-check.md` — load all 36 checks
-2. Apply the gate-specific subset:
+2. Read `performance-data-checks.md` — load performance and data layer checks (PG-01 through PG-06, DL-01 through DL-05)
+3. Read `security-checks.md` — load security checks (SE-01 through SE-12, ST-01 through ST-03)
+4. Apply the gate-specific subset:
    - **Plan gate:** PL-01 through PL-05
-   - **Test gate:** TQ-01 through TQ-13
-   - **Code gate:** CQ-01 through CQ-18
-3. For each check, examine the artifacts and record findings
-4. If `prior_findings` provided: verify each prior finding was addressed
-5. Read `settings.quality.p1_threshold` for gate logic
+   - **Test gate:** TQ-01 through TQ-13, ST-01 through ST-03
+   - **Code gate:** CQ-01 through CQ-18, PG-01 through PG-06, DL-01 through DL-05, SE-01 through SE-12
+5. For each check, examine the artifacts and record findings
+6. If `prior_findings` provided: verify each prior finding was addressed
+7. Read `settings.quality.p1_threshold` for gate logic
 
 **Check depth enforcement** (from `story-tiers.md`):
 - Quick tier (Trivial/Small): P2+ findings are observations, not blockers
@@ -81,6 +83,21 @@ else if p1_count > p1_max:
 else:
     emit CHECK_PASSED
 ```
+
+### REFACTOR_VERIFY
+
+**When:** VERIFY phase of refactoring pipeline.
+**Focus:** Confirm refactoring preserved behavior and improved quality.
+
+Process:
+1. Run full test suite (not just target tests)
+2. Compare coverage against baseline from `refactoring-handoff.yml`
+3. Verify no new P0/P1 findings introduced
+4. Confirm smell count reduced (compare assessment vs current)
+5. For structural tier: check architecture boundaries, circular dependencies, naming consistency
+6. Load `performance-data-checks.md` and `security-checks.md` for applicable checks on changed code
+
+Gate logic: same as QUICK_CHECK. Emit `REFACTOR_PASS` or `REFACTOR_BLOCKED`.
 
 ### COMPREHENSIVE
 
@@ -118,7 +135,7 @@ review_result:
     p1_count: integer
     p2_count: integer
     total: integer
-  gate_result: CHECK_PASSED|CHECK_BLOCKED|QUALITY_PASS|QUALITY_BLOCKED
+  gate_result: CHECK_PASSED|CHECK_BLOCKED|QUALITY_PASS|QUALITY_BLOCKED|REFACTOR_PASS|REFACTOR_BLOCKED
   gate_reason: "human-readable reason for the gate result"
 ```
 
@@ -132,6 +149,8 @@ review_result:
 | `QUALITY_BLOCKED` | Comprehensive review failed |
 | `PHASE_GATE_FAILED` | Phase transition guard failed |
 | `COVERAGE_GATE_FAILED` | Coverage below tier threshold |
+| `REFACTOR_PASS` | Refactoring verification passed — behavior preserved, metrics improved |
+| `REFACTOR_BLOCKED` | Refactoring verification failed — tests broken, coverage decreased, or P0/P1 found |
 | `MAX_LOOPS_REACHED` | Fix loop exhausted (emitted by orchestrator, not directly) |
 
 ## Critical Rules
