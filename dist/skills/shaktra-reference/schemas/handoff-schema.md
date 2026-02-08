@@ -7,7 +7,7 @@ Defines `.shaktra/stories/<story_id>/handoff.yml` — the TDD state machine that
 ```yaml
 story_id: string          # matches story file id
 tier: string              # "trivial" | "small" | "medium" | "large"
-current_phase: string     # "plan" | "tests" | "code" | "quality" | "complete" | "failed"
+current_phase: string     # "pending" | "plan" | "tests" | "code" | "quality" | "complete" | "failed"
 completed_phases: [string] # append-only log of completed phases
 ```
 

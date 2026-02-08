@@ -86,9 +86,9 @@ After all components are implemented:
 Run the coverage tool configured in settings:
 - Compare against tier threshold from `settings.tdd`
   - Trivial: `settings.tdd.hotfix_coverage_threshold`
-  - Small: 80%
+  - Small: `settings.tdd.small_coverage_threshold`
   - Medium: `settings.tdd.coverage_threshold`
-  - Large: 95%
+  - Large: `settings.tdd.large_coverage_threshold`
 - If below threshold: identify uncovered paths and add tests or implementation
 
 ### 6. Stage Changes

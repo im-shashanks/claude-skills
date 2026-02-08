@@ -14,9 +14,11 @@ import sys
 
 PROTECTED = r"(?:main|master|prod|production)"
 PROTECTED_SET = {"main", "master", "prod", "production"}
-# git checkout <branch> or git switch <branch> — but NOT checkout -b / switch -c
+# git checkout <branch> or git switch <branch> — but NOT branch-creation flags
+# Handles intervening flags (e.g., --detach, --force) before the protected branch name
+# Excludes: -b, -B, -c, --create (branch creation, not switching)
 CHECKOUT_RE = re.compile(
-    rf"git\s+(?:checkout|switch)\s+(?!-[bcB]){PROTECTED}\b"
+    rf"git\s+(?:checkout|switch)\s+(?!.*(?:-[bcB]\b|--create\b))(?:\S+\s+)*{PROTECTED}\b"
 )
 # git push ... <branch>  (captures "git push origin main", "git push main")
 PUSH_RE = re.compile(rf"git\s+push\b.*\b{PROTECTED}\b")

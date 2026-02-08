@@ -150,7 +150,7 @@ Test names follow given/when/then or behavior-based naming that conveys intent.
 
 ---
 
-## Code Gate (17 checks)
+## Code Gate (18 checks)
 
 Applied during GREEN phase review. Focus: security, reliability, production-readiness.
 

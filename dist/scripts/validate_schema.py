@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Hook: validate Shaktra state files on write.
 
-Event: PostToolUse (Write)
+Event: PostToolUse (Write|Edit)
 Exit 0 = allow, Exit 2 = block.
 """
 
@@ -28,7 +28,7 @@ VALID_SCOPES = {
     "bug_fix", "feature", "refactor", "config", "docs", "test",
     "performance", "security", "integration", "migration", "scaffold",
 }
-VALID_PHASES = {"plan", "tests", "code", "quality", "complete", "failed"}
+VALID_PHASES = {"pending", "plan", "tests", "code", "quality", "complete", "failed"}
 PHASE_ORDER = ["plan", "tests", "code", "quality"]
 
 

@@ -25,12 +25,12 @@ You receive:
 
 ## Process
 
-1. **Read** the handoff file and any quality findings at the artifacts path.
+1. **Read** the handoff file at the artifacts path (if it exists). For workflows without a handoff (analysis, general), skip to step 2 and extract insights from available artifacts only.
 2. **Identify** insights that meet the capture bar (see below).
 3. **Read** existing `.shaktra/memory/lessons.yml` to check for duplicates and current count.
 4. **Archive** oldest entries to `.shaktra/memory/lessons-archive.yml` if count would exceed 100.
-5. **Append** new lessons with sequential IDs, today's date, and the source story ID.
-6. **Set** `memory_captured: true` in the handoff file.
+5. **Append** new lessons with sequential IDs, today's date, and the source story ID (or workflow type if no story).
+6. **Set** `memory_captured: true` in the handoff file (skip if no handoff exists).
 
 ## Capture Bar
 

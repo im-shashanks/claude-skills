@@ -110,7 +110,7 @@ Tracks analysis completion state for resumability.
 version: string          # plugin version from plugin.json
 started_at: ISO-8601
 completed_at: ISO-8601 | null
-status: in_progress | complete | partial
+status: pending | in_progress | complete | partial
 
 stages:
   pre_analysis:

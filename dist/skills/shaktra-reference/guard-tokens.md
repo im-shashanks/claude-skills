@@ -1,15 +1,15 @@
 # Guard Tokens
 
-Exactly 15 structured tokens used for signaling across Shaktra agents. Tokens are emitted as plain text markers in agent output. Domain-specific tokens (e.g., story lifecycle) are defined in their respective agent files.
+15 core workflow tokens used for signaling across Shaktra agents. Tokens are emitted as plain text markers in agent output. Domain-specific skills define additional tokens (review: 4, analyze: 3, general: 3) in their respective SKILL.md files.
 
 ## Phase Progression
 
 | Token | When Emitted | Emitter | What Happens Next |
 |---|---|---|---|
-| `TESTS_NOT_RED` | Test suite does not have a failing test before implementation begins | Test Agent | Block implementation — write a failing test first |
-| `TESTS_NOT_GREEN` | Implementation complete but tests still failing | Test Agent | Return to implementation — fix until tests pass |
+| `TESTS_NOT_RED` | Test suite does not have a failing test before implementation begins | Orchestrator, Test Agent | Block implementation — write a failing test first |
+| `TESTS_NOT_GREEN` | Implementation complete but tests still failing | Developer | Return to implementation — fix until tests pass |
 | `PHASE_GATE_FAILED` | A TDD phase transition check failed (red/green/refactor) | SW Quality | Block phase transition — resolve the failure |
-| `COVERAGE_GATE_FAILED` | Coverage falls below the tier's required threshold | Test Agent | Block completion — add tests to meet threshold |
+| `COVERAGE_GATE_FAILED` | Coverage falls below the tier's required threshold | Developer, SW Quality | Block completion — add tests to meet threshold |
 
 ## Quality Gates
 
@@ -17,8 +17,8 @@ Exactly 15 structured tokens used for signaling across Shaktra agents. Tokens ar
 |---|---|---|---|
 | `CHECK_PASSED` | A quality check passed during development | SW Quality | Continue to next check or phase |
 | `CHECK_BLOCKED` | A quality check failed during the TDD fix loop | SW Quality | Return to fix loop — address the finding |
-| `QUALITY_PASS` | Final merge gate passed (0 P0, P1 within threshold) | Code Reviewer | Merge is allowed |
-| `QUALITY_BLOCKED` | Final merge gate failed (P0 exists or P1 exceeds threshold) | Code Reviewer | Block merge — resolve findings first |
+| `QUALITY_PASS` | Quality gate passed (0 P0, P1 within threshold) | SW Quality, TPM Quality | Proceed to next phase or allow merge |
+| `QUALITY_BLOCKED` | Quality gate failed (P0 exists or P1 exceeds threshold) | SW Quality, TPM Quality | Block — resolve findings first |
 
 ## Workflow
 

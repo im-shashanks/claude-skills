@@ -55,7 +55,6 @@ Create the following directories:
 .shaktra/stories/
 .shaktra/designs/
 .shaktra/analysis/
-.shaktra/.tmp/
 ```
 
 ### Step 4: Copy and Populate Templates
@@ -131,7 +130,6 @@ Created:
   .shaktra/stories/
   .shaktra/designs/
   .shaktra/analysis/
-  .shaktra/.tmp/
   CLAUDE.md (created | updated)
 
 Next steps:

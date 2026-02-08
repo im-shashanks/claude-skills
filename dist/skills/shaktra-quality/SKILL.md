@@ -1,7 +1,7 @@
 ---
 name: shaktra-quality
 description: >
-  Quality engine for the TDD pipeline — provides quick-check (~35 checks) for gate reviews
+  Quality engine for the TDD pipeline — provides quick-check (36 checks) for gate reviews
   and comprehensive review (14 dimensions) for final quality assessment. Loaded by sw-quality agent.
 user-invocable: false
 ---
@@ -24,7 +24,7 @@ This skill never restates severity definitions or quality dimension frameworks �
 
 ### QUICK_CHECK (TDD Gate Reviews)
 
-- ~35 checks organized by gate (Plan, Test, Code)
+- 36 checks organized by gate (Plan, Test, Code)
 - All checks loaded regardless of tier (check depth controls severity enforcement, not loading)
 - Gate-specific focus: sw-quality applies the subset relevant to the current gate
 - Max 3 fix loops per gate
@@ -61,7 +61,7 @@ Max fix loops: 3 per gate. After 3 failed attempts, emit `MAX_LOOPS_REACHED` and
 
 | File | Purpose |
 |---|---|
-| `quick-check.md` | ~35 checks with IDs, severities, gates, detection guidance, and examples |
+| `quick-check.md` | 36 checks with IDs, severities, gates, detection guidance, and examples |
 | `comprehensive-review.md` | Full 14-dimension review process with plan adherence and decision consolidation |
 
 ## References

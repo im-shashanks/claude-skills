@@ -169,7 +169,7 @@ Guard tokens:
 2. SW quality runs full review:
    - Executes tests, verifies coverage
    - Applies dimensions A-M + N (Plan Adherence)
-   - Consolidates decisions to `.shaktra/memory/decisions.yml`
+   - Identifies decisions to promote (orchestrator writes to `.shaktra/memory/decisions.yml`)
    - Checks cross-story consistency
    - For Thorough tier: expanded review (architecture, performance, dependencies)
 3. Run quality loop:

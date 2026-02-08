@@ -23,6 +23,7 @@ Classify intent using a **noun-first, two-signal model**. Shaktra-specific nouns
 | Review | PR, pull request, PR #/URL, "review" + ST-### | review (with PR/story noun) | `/shaktra:review` |
 | Analyze | codebase, brownfield, analysis, dimension names (architecture, practices, dependencies, tech-debt, data-flows, critical-paths, domain-model, entry-points) | analyze (codebase context) | `/shaktra:analyze` |
 | Init | "initialize", "set up shaktra", "init" | init, initialize, set up | `/shaktra:init` |
+| Doctor | "health", "doctor", "diagnose", "config check", "validation" | check, diagnose, validate | `/shaktra:doctor` |
 | General | No Shaktra-specific noun, domain questions (AWS, ML, docs), general technical questions | — | `/shaktra:general` |
 
 ---
@@ -34,7 +35,7 @@ When multiple routes match, resolve in this order:
 1. **Story ID + "review"** → Review (e.g., "review ST-001")
 2. **Story ID** (without "review") → Dev (e.g., "implement ST-001")
 3. **PR reference** (#number, PR URL, "pull request") → Review
-4. **Utility match** ("init", "initialize", "set up shaktra") → Init
+4. **Utility match** ("init", "initialize", "set up shaktra") → Init; ("doctor", "health", "diagnose") → Doctor
 5. **Noun match** → per route table; noun beats verb
 6. **Verb-only match** (no Shaktra noun) → confirm with user before routing
 7. **No match** → General
@@ -89,6 +90,7 @@ When invoked with no request text (just `/shaktra:workflow`), present available 
 | Code Review | `/shaktra:review` | PR reviews, app-level review |
 | Analysis | `/shaktra:analyze` | Brownfield codebase analysis |
 | General | `/shaktra:general` | Domain expertise, architectural guidance |
+| Doctor | `/shaktra:doctor` | Health checks, config validation, diagnostics |
 
 You can also invoke any skill directly — the router is a convenience, not a requirement.
 

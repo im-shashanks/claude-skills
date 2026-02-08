@@ -88,7 +88,7 @@ Extract decisions made during development that should persist:
    - Does it match an existing entry in `.shaktra/memory/decisions.yml`? → Skip (no duplicate)
    - Is it specific enough to be actionable? → Promote
    - Is it too story-specific to generalize? → Skip
-3. Append qualifying decisions to `.shaktra/memory/decisions.yml`
+3. Return qualifying decisions in `decisions_promoted` output — the orchestrator writes them to `.shaktra/memory/decisions.yml`
 
 ### 7. Cross-Story Consistency
 

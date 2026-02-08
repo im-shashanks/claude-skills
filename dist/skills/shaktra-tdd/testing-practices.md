@@ -162,7 +162,7 @@ Coverage thresholds (from `settings.tdd.coverage_threshold`) are floors, not cei
 **Coverage rules:**
 - Read thresholds from `.shaktra/settings.yml` — never hardcode
 - Trivial tier: `settings.tdd.hotfix_coverage_threshold`
-- Small tier: 80%
+- Small tier: `settings.tdd.small_coverage_threshold`
 - Medium tier: `settings.tdd.coverage_threshold`
-- Large tier: 95%
+- Large tier: `settings.tdd.large_coverage_threshold`
 - Coverage must come from behavioral tests, not from tests that simply execute code without meaningful assertions

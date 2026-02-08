@@ -54,7 +54,7 @@ Output: Qualitative findings — severity, issue, guidance. No check IDs.
 **Focus:** Gate-specific checks from `quick-check.md`.
 
 Process:
-1. Read `quick-check.md` — load all ~35 checks
+1. Read `quick-check.md` — load all 36 checks
 2. Apply the gate-specific subset:
    - **Plan gate:** PL-01 through PL-05
    - **Test gate:** TQ-01 through TQ-13
@@ -92,7 +92,7 @@ Process:
 2. Run tests and verify coverage (actual execution, not self-reported)
 3. Apply dimensions A-M from `quality-dimensions.md`
 4. Apply Dimension N: Plan Adherence
-5. Consolidate decisions to `.shaktra/memory/decisions.yml`
+5. Identify decisions to promote (returned in output — orchestrator writes to `decisions.yml`)
 6. Check cross-story consistency against existing decisions
 7. For Thorough tier: add expanded review (architecture, performance, dependencies)
 

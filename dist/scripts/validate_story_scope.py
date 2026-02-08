@@ -121,7 +121,10 @@ def main() -> None:
         if not isinstance(declared, str):
             continue
         norm_declared = normalize(declared, project)
-        if rel == norm_declared or rel.endswith(norm_declared) or norm_declared.endswith(rel):
+        # Exact match or path-segment-aware suffix match (must align on '/')
+        if rel == norm_declared:
+            sys.exit(0)
+        if rel.endswith("/" + norm_declared) or norm_declared.endswith("/" + rel):
             sys.exit(0)
 
     print(

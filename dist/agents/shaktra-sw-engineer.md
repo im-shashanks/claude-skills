@@ -6,6 +6,7 @@ skills:
   - shaktra-tdd
 tools:
   - Read
+  - Write
   - Glob
   - Grep
 ---
