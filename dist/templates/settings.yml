@@ -25,3 +25,4 @@ sprints:
   enabled: true
   velocity_tracking: true
   sprint_duration_weeks: 2
+  default_velocity: 15       # story points per sprint, used when no velocity history exists

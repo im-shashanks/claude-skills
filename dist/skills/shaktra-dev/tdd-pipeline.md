@@ -48,7 +48,7 @@ Verify `.shaktra/settings.yml` has `language`, `test_framework`, and `coverage_t
 
 ### 2. Story Dependency Check
 
-Read the story's `blocked_by` field (if present). Check if blocking stories are complete.
+Read the story's `metadata.blocked_by` field (if present). Check if blocking stories are complete (their `metadata.status` is `"done"`).
 
 **If unresolved:** "Story {id} is blocked by {blocker_id} (status: {status}). Complete blocking stories first." Stop.
 
@@ -177,6 +177,24 @@ Mandatory final step — the orchestrator must not skip this regardless of tier.
 3. Update handoff: set `current_phase: complete`
 
 Note: `decisions.yml` is already updated during QUALITY phase. Memory curator handles lessons only.
+
+---
+
+## SPRINT STATE UPDATE
+
+After MEMORY CAPTURE, if `settings.sprints.enabled` is true:
+
+1. Read `.shaktra/sprints.yml`
+2. If the completed story is in `current_sprint.stories`:
+   - Update the story's `metadata.status` to `"done"` in the story file
+   - Track completed points: add story points to sprint velocity record
+3. If all stories in `current_sprint` are done:
+   - Move current sprint to `velocity.history` with `planned_points` and `completed_points`
+   - Recalculate `velocity.average` and `velocity.trend` per sprint-schema.md formulas
+   - Set `current_sprint` to null (next sprint workflow will create the next sprint)
+4. Write updated `.shaktra/sprints.yml`
+
+This step is skipped if sprints are not enabled or the story is not in the current sprint.
 
 ---
 

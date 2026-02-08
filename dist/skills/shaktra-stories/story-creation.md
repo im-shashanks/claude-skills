@@ -44,6 +44,12 @@ Field completeness rules:
 - Medium: 12 fields (add scope through observability_rules)
 - Large: 18+ fields (add failure_modes through resource_safety)
 
+Metadata fields (all tiers — populate the `metadata` section per `story-schema.md`):
+- `metadata.story_points`: assign based on tier and complexity. Use `[1, 2, 3, 5, 8, 10]`. Trivial: 1-2, Small: 2-3, Medium: 3-5, Large: 5-10.
+- `metadata.priority`: set to `"medium"` by default. PM adjusts via RICE scoring later.
+- `metadata.blocked_by`: populate from design doc dependency analysis. Empty list if no dependencies.
+- `metadata.status`: set to `"planned"` for all new stories.
+
 ### Step 6 — Per-Story Self-Validation
 
 Before moving to the next story, verify this 6-point checklist:
@@ -52,7 +58,7 @@ Before moving to the next story, verify this 6-point checklist:
 2. **Error case present:** `io_examples` includes at least one error-case example (Medium+)
 3. **Test reference integrity:** Every `test` field value matches an ID in `test_specs`
 4. **No orphan tests:** Every `test_specs` entry is referenced by at least one other field
-5. **Size limits:** Story points <= 10, files touched <= 3. If exceeded, split the story.
+5. **Size limits:** `metadata.story_points` <= 10, files touched <= 3. If exceeded, split the story.
 6. **Feature flags:** Large tier stories have `feature_flags` with `default: false`
 
 Fix any failures before proceeding.

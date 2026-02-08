@@ -7,6 +7,7 @@ Defines `.shaktra/sprints.yml` — sprint state managed by the scrummaster agent
 ```yaml
 current_sprint:
   id: string               # "SP-001" — sequential
+  goal: string             # business objective for this sprint (PM assigns)
   start_date: string       # ISO 8601 date
   end_date: string         # start_date + settings.sprints.sprint_duration_weeks
   stories: [string]        # story IDs committed to this sprint

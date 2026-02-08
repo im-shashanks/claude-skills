@@ -106,9 +106,19 @@ After scoring all stories:
 
 ### Output
 
-Write to `.shaktra/sprints.yml` backlog section per `schemas/sprint-schema.md`:
-- Each story with `priority` derived from class (Quick Win → high, Big Bet → critical, Standard → medium)
-- Include RICE score and classification as metadata in a comment above each entry
+Return RICE results to the TPM. Do NOT write to `sprints.yml` — the scrummaster owns that file.
+
+Output format (return to TPM):
+```yaml
+stories_ranked:
+  - story_id: ST-001
+    rice_score: 45.0
+    classification: "Quick Win"    # Quick Win | Big Bet | Standard
+    priority: high                 # derived: Quick Win → high, Big Bet → critical, Standard → medium
+    story_points: 3
+  # ... one entry per story, ordered by rice_score descending
+sprint_goal_suggestion: string     # suggested business objective for the next sprint
+```
 
 ---
 

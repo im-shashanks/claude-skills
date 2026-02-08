@@ -78,24 +78,71 @@ Enrich existing sparse stories with tier-appropriate fields. Preserves original 
 
 ## Sprint Allocation
 
-When `settings.sprints.enabled` is true, allocate stories to sprints after creation or enrichment.
+When the TPM dispatches sprint allocation, assign stories to sprints based on RICE priorities and velocity.
+
+### Input
+
+You receive from the TPM:
+- `rice_results`: PM's RICE-scored and classified stories
+- `sprint_mode`: `current` (plan next sprint only) | `full` (distribute across all sprints)
 
 ### Process
 
-1. Read `.shaktra/sprints.yml` for current velocity and sprint state
-2. Sort stories by: dependencies first (unblocked before blocked) → priority → points ascending
-3. Assign stories to the current sprint until `committed_points` reaches `capacity_points`
-4. Overflow stories go to the backlog with appropriate priority
+1. **Load state**
+   - Read `.shaktra/sprints.yml` for velocity history and current sprint state
+   - Read `.shaktra/settings.yml` for `sprints.default_velocity` and `sprint_duration_weeks`
+   - Read all stories from `.shaktra/stories/` to get full story data
+
+2. **Determine capacity**
+   - If velocity history has >= 1 sprint: `capacity = velocity.average` (rolling 3-sprint avg from schema)
+   - If velocity history is empty: `capacity = settings.sprints.default_velocity`
+   - Apply trend adjustment:
+     - `declining`: capacity = capacity * 0.9 (conservative — protect against overcommitment)
+     - `improving`: no adjustment (don't inflate expectations)
+     - `stable`: no adjustment
+
+3. **Apply PM priorities**
+   - Update each story's `metadata.priority` from RICE results
+   - Update each story's `metadata.story_points` if PM adjusted
+
+4. **Sort stories for assignment**
+   Order: unblocked before blocked → priority (critical > high > medium > low) → scope (scaffold first) → points ascending
+
+5. **Validate dependencies**
+   - For each story with `blocked_by`: verify referenced story IDs exist
+   - Flag invalid references to the TPM
+
+6. **Assign stories to sprints**
+   ```
+   sprint_number = 1
+   current_capacity = capacity
+   current_points = 0
+
+   FOR EACH story in sorted order:
+     # Skip stories blocked by unassigned stories
+     IF story.metadata.blocked_by has stories not yet assigned to an earlier sprint:
+       defer story (re-attempt after blockers are assigned)
+
+     IF current_points + story.metadata.story_points > current_capacity:
+       IF sprint_mode == "current":
+         move remaining stories to backlog
+         BREAK
+       ELSE:
+         sprint_number += 1
+         current_points = 0
+
+     assign story to sprint_number
+     current_points += story.metadata.story_points
+   ```
+
+7. **Write sprints.yml**
+   - Set `current_sprint` with sprint 1 data (id, goal from PM, stories, capacity_points, committed_points)
+   - Write backlog with remaining stories (priority-ordered)
+   - Preserve velocity.history from prior state
 
 ### Capacity Guard
 
-```
-if committed_points + story.points > capacity_points:
-    move story to backlog
-    continue to next story
-```
-
-Never over-commit a sprint. If the next story doesn't fit, it goes to backlog regardless of priority.
+Never over-commit. If the next story exceeds remaining capacity, it goes to the next sprint (full mode) or backlog (current mode).
 
 ---
 

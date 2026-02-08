@@ -2,15 +2,21 @@
 
 Defines the YAML structure for story files in `.shaktra/stories/`. Fields accumulate by tier — each tier inherits all fields from lower tiers. Tier definitions and gate behavior are in `story-tiers.md`.
 
-## Trivial — 3 fields
+## Trivial — 3 fields + metadata
 
 ```yaml
 id: string           # "ST-001" — sequential
 title: string        # imperative, ≤100 characters
 description: string  # what and why, 1-3 sentences
+
+metadata:
+  story_points: integer    # from [1, 2, 3, 5, 8, 10] — assigned based on tier and complexity
+  priority: string         # "critical" | "high" | "medium" | "low" — PM adjusts via RICE
+  blocked_by: [string]     # story IDs that must complete before this starts
+  status: string           # "planned" | "in_progress" | "done"
 ```
 
-## Small — adds 2 fields (total 5)
+## Small — adds 2 fields (total 5 + metadata)
 
 ```yaml
 files: [string]             # paths of files to create or modify
@@ -22,7 +28,7 @@ acceptance_criteria:        # Gherkin-style
     priority: string        # "must" | "should"
 ```
 
-## Medium — adds 7 fields (total 12)
+## Medium — adds 7 fields (total 12 + metadata)
 
 ```yaml
 scope: string               # exactly 1 from allowed values (see below)
@@ -65,7 +71,7 @@ observability_rules:
   traces: [string]          # span names for distributed tracing
 ```
 
-## Large — adds 6 fields (total 18+)
+## Large — adds 6 fields (total 18+ plus metadata)
 
 ```yaml
 failure_modes:
@@ -109,6 +115,9 @@ resource_safety:
 3. **Error case required:** `io_examples` must include at least one error-case example (Medium+).
 4. **Edge case coverage:** Large tier must cover at least 5 of 10 edge case categories.
 5. **Inheritance:** Higher tiers include all lower-tier fields — never omit inherited fields.
+6. **Story points range:** `metadata.story_points` must be from `[1, 2, 3, 5, 8, 10]`.
+7. **Blocked-by validity:** `metadata.blocked_by` references must be valid story IDs.
+8. **Status default:** `metadata.status` defaults to `"planned"` on creation.
 
 ## Allowed Scope Values
 

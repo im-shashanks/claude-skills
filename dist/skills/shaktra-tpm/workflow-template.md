@@ -65,8 +65,11 @@ Complete TPM workflow — design through sprint planning. This is the default fo
    - User decides: create additional stories or accept gaps
    - If additional stories needed: return to Phase 2 for the new stories
 2. Spawn **product-manager** (mode: rice) with stories directory
-   - Stories classified as Quick Wins, Big Bets, Standard
-   - Sprint allocation written to `.shaktra/sprints.yml` (if sprints enabled)
+   - PM returns RICE results: scored stories, classifications, sprint goal suggestion
+3. If `settings.sprints.enabled`:
+   - Spawn **scrummaster** (mode: sprint-allocation) with rice_results and sprint_mode: `full`
+   - Scrummaster writes `.shaktra/sprints.yml`
+   - Present PM's sprint goal suggestion to user. If user provides alternative: update `current_sprint.goal` in `.shaktra/sprints.yml`
 
 ### Phase 4 — Memory
 
@@ -104,7 +107,7 @@ Create stories from an existing design doc. Requires an approved design doc.
 
 1. Locate the design doc (user-specified path or search `.shaktra/designs/`)
 2. Execute Full Workflow Phase 2 (Stories)
-3. Execute Full Workflow Phase 3 (PM Analysis)
+3. Execute Full Workflow Phase 3 (PM Analysis — includes sprint goal review if sprints enabled)
 4. Execute Full Workflow Phase 4 (Memory)
 5. Present stories summary, coverage, and sprint allocation
 
@@ -143,18 +146,45 @@ Fast path for trivial fixes. Produces a Trivial-tier story with minimal overhead
 
 ## Workflow: Sprint
 
-Re-prioritize and allocate stories to sprints without creating new stories.
+Plan or re-plan sprint allocation for existing stories.
 
 **Prerequisite:** Stories must exist in `.shaktra/stories/`. If none found, inform user.
 
+### Phase 1 — RICE Prioritization
+
 1. Spawn **product-manager** (mode: rice) with stories directory
-2. Scrummaster allocates stories to sprints based on RICE classification and velocity
-3. Present sprint plan:
-   - Current sprint stories with points
-   - Quick Wins highlighted for early execution
-   - Big Bets with scheduling recommendations
-   - Backlog with priority ordering
-4. Spawn **memory-curator** with workflow_type: "sprint-planning"
+2. PM returns RICE results: scored stories, classifications, sprint goal suggestion
+
+### Phase 2 — Sprint Allocation
+
+1. Determine sprint_mode:
+   - If `.shaktra/sprints.yml` has no current_sprint or current_sprint is null: `full` (first-time planning)
+   - If user says "re-prioritize" or "plan next sprint": `current`
+   - If user says "replan all sprints": `full`
+2. Spawn **scrummaster** (mode: sprint-allocation) with:
+   - rice_results from Phase 1
+   - sprint_mode determined above
+3. Scrummaster writes updated `.shaktra/sprints.yml`
+
+### Phase 3 — Sprint Goal Review
+
+1. Present the PM's sprint goal suggestion to the user
+2. If user provides alternative goal: TPM updates `current_sprint.goal` in `.shaktra/sprints.yml`
+3. If user accepts: proceed
+
+### Phase 4 — Memory
+
+1. Spawn **memory-curator** with workflow_type: "sprint-planning"
+
+### Completion
+
+Present sprint summary:
+- Sprint ID and goal
+- Committed stories with points (highlight Quick Wins and Big Bets)
+- Capacity: committed_points / capacity_points
+- Velocity trend (if history exists)
+- Backlog: remaining stories count and total points
+- Recommend: `/shaktra:dev {first_story_id}` to begin implementation
 
 ---
 
