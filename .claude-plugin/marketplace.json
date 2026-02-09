@@ -1,0 +1,13 @@
+{
+  "name": "shaktra-marketplace",
+  "owner": {
+    "name": "Shashank"
+  },
+  "plugins": [
+    {
+      "name": "shaktra",
+      "source": ".",
+      "description": "Opinionated software development framework with TDD, quality gates, and multi-agent orchestration"
+    }
+  ]
+}

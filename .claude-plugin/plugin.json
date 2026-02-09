@@ -1,0 +1,9 @@
+{
+  "name": "shaktra",
+  "version": "0.1.0",
+  "description": "Opinionated software development framework with TDD, quality gates, and multi-agent orchestration",
+  "author": {
+    "name": "Shashank"
+  },
+  "keywords": ["tdd", "quality", "agile", "framework"]
+}

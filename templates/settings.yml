@@ -1,0 +1,36 @@
+project:
+  name: ""
+  type: ""              # greenfield | brownfield
+  language: ""          # python | typescript | go | java | rust | etc.
+  architecture: ""      # layered | hexagonal | clean | mvc | feature-based | event-driven
+  test_framework: ""
+  coverage_tool: ""
+  package_manager: ""
+
+tdd:
+  coverage_threshold: 90
+  hotfix_coverage_threshold: 70
+  small_coverage_threshold: 80
+  large_coverage_threshold: 95
+
+quality:
+  p1_threshold: 2
+
+review:
+  verification_test_persistence: ask   # auto | always | never | ask
+  min_verification_tests: 5
+
+analysis:
+  summary_token_budget: 600   # max tokens per artifact summary section
+  incremental_refresh: true   # enable checksum-based incremental refresh
+
+refactoring:
+  safety_threshold: 80              # min coverage % before targeted refactoring
+  structural_safety_threshold: 90   # min coverage % before structural refactoring
+  max_characterization_tests: 20    # max tests added during FORTIFY phase
+
+sprints:
+  enabled: true
+  velocity_tracking: true
+  sprint_duration_weeks: 2
+  default_velocity: 15       # story points per sprint, used when no velocity history exists
