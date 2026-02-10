@@ -5,6 +5,8 @@ Event: PostToolUse (Write|Edit)
 Exit 0 = allow, Exit 2 = block.
 """
 
+from __future__ import annotations
+
 import json
 import os
 import re
@@ -23,8 +25,9 @@ PHASE_ORDER = ["plan", "tests", "code", "quality"]
 
 
 def normalize(file_path: str, project: str) -> str:
-    if file_path.startswith(project):
-        file_path = file_path[len(project):]
+    proj = project.rstrip(os.sep)
+    if file_path == proj or file_path.startswith(proj + os.sep):
+        file_path = file_path[len(proj):]
     return file_path.lstrip(os.sep)
 
 
@@ -113,7 +116,8 @@ def main() -> None:
     errors = validate_handoff(content) if is_handoff else validate_story(content)
 
     if errors:
-        print(f"BLOCKED: Schema validation failed for {rel}\n")
+        print(f"BLOCKED: Schema validation failed for {rel}")
+        print(f"  The file was already written — correct it to match the schema.\n")
         for err in errors:
             print(f"  - {err}")
         sys.exit(2)

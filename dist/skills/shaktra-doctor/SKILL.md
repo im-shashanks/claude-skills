@@ -3,6 +3,7 @@ name: shaktra-doctor
 description: >
   Diagnose Shaktra framework health. Validates plugin structure, project configuration,
   and design constraints. Read-only — never modifies files.
+user-invocable: true
 ---
 
 # /shaktra:doctor — Framework Health Check

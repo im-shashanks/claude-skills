@@ -47,8 +47,13 @@ sprints:
 
 | Setting | Read By |
 |---|---|
-| `project.*` | init skill (writes), all agents (context) |
+| `project.name` | init skill (writes), all agents (project identification) |
+| `project.type` | analyze skill (brownfield guard), all agents (context) |
+| `project.language` | analyze skill (glob patterns), general skill (domain context), all agents (context) |
 | `project.architecture` | architect (validates alignment), sw-engineer (pattern selection), developer (code structure), sw-quality (ARC checks — conditional enforcement) |
+| `project.test_framework` | all agents (implicit context — determines test syntax and runner conventions) |
+| `project.coverage_tool` | all agents (implicit context — determines coverage report format) |
+| `project.package_manager` | all agents (implicit context — determines install/build commands) |
 | `tdd.coverage_threshold` | developer, story-tiers gate matrix |
 | `tdd.hotfix_coverage_threshold` | developer, story-tiers gate matrix |
 | `tdd.small_coverage_threshold` | developer, story-tiers gate matrix |

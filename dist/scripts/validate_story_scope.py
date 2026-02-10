@@ -5,6 +5,8 @@ Event: PreToolUse (Write|Edit)
 Exit 0 = allow, Exit 2 = block.
 """
 
+from __future__ import annotations
+
 import glob
 import json
 import os
@@ -67,13 +69,14 @@ def find_active_story_id(yaml) -> str | None:
 
 
 def normalize(file_path: str, project: str) -> str:
-    """Strip project dir prefix and leading ./ to get a relative path."""
-    if file_path.startswith(project):
-        file_path = file_path[len(project):]
+    """Strip project dir prefix, leading ./, and trailing slash to get a relative path."""
+    proj = project.rstrip(os.sep)
+    if file_path == proj or file_path.startswith(proj + os.sep):
+        file_path = file_path[len(proj):]
     file_path = file_path.lstrip(os.sep)
     if file_path.startswith("./"):
         file_path = file_path[2:]
-    return file_path
+    return file_path.rstrip(os.sep)
 
 
 def main() -> None:
@@ -133,9 +136,15 @@ def main() -> None:
         if not isinstance(declared, str):
             continue
         norm_declared = normalize(declared, project)
-        # Exact match or path-segment-aware suffix match (must align on '/')
+        if not norm_declared:
+            continue
+        # Exact match
         if rel == norm_declared:
             sys.exit(0)
+        # Directory containment: rel is inside the declared directory
+        if rel.startswith(norm_declared + "/"):
+            sys.exit(0)
+        # Suffix match: aligned on path segments (handles absolute vs relative)
         if rel.endswith("/" + norm_declared) or norm_declared.endswith("/" + rel):
             sys.exit(0)
 

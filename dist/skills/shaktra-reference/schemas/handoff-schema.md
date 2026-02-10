@@ -77,14 +77,16 @@ These decisions persist in `decisions.yml` and are loaded by the architect, sw-e
 
 ## Quality Findings
 
-**Population:** The orchestrator persists findings to this field after each quality gate (QUICK_CHECK and COMPREHENSIVE). SW Quality returns findings as output; the orchestrator writes the latest findings here. The `check_p0_findings` hook reads this field at workflow completion.
+**Population:** The orchestrator persists findings to this field after each quality gate (QUICK_CHECK and COMPREHENSIVE). SW Quality returns findings as output; the orchestrator writes the latest findings here. The `check_p0_findings` hook reads this field at workflow completion — it filters out findings with `resolved: true`.
+
+**Note:** SW Quality agent output may include additional fields (`check_id`, `evidence`, `guidance`) beyond the schema below. The orchestrator writes the full agent output; consumers should tolerate extra fields.
 
 ```yaml
 quality_findings:
   - severity: string      # P0 | P1 | P2 | P3
     dimension: string     # quality dimension (A-M)
     gate: string          # "plan" | "test" | "code" | "quality" — which gate produced this
-    description: string
+    issue: string         # specific description of the finding
     file: string
     line: integer
     resolved: boolean     # true if fixed in a subsequent fix loop

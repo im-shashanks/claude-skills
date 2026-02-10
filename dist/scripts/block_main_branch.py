@@ -5,6 +5,8 @@ Event: PreToolUse (Bash)
 Exit 0 = allow, Exit 2 = block.
 """
 
+from __future__ import annotations
+
 import json
 import os
 import re
@@ -17,13 +19,15 @@ PROTECTED_SET = {"main", "master", "prod", "production"}
 # git checkout <branch> or git switch <branch> — but NOT branch-creation flags
 # Handles intervening flags (e.g., --detach, --force) before the protected branch name
 # Excludes: -b, -B, -c, --create (branch creation, not switching)
+# Also catches remote-tracking refs: origin/main, upstream/production, refs/heads/main
 CHECKOUT_RE = re.compile(
-    rf"git\s+(?:checkout|switch)\s+(?!.*(?:-[bcB]\b|--create\b))(?:\S+\s+)*{PROTECTED}\b"
+    rf"(?:^|[;&|]\s*)git\s+(?:checkout|switch)\s+(?!.*(?:-[bcB]\b|--create\b))(?:\S+\s+)*(?:\w+/)*{PROTECTED}(?![\w-])"
 )
 # git push ... <branch>  (captures "git push origin main", "git push main")
-PUSH_RE = re.compile(rf"git\s+push\b.*\b{PROTECTED}\b")
+# [^;&|]* stops at shell operators to avoid cross-command matching
+PUSH_RE = re.compile(rf"(?:^|[;&|]\s*)git\s+push\b[^;&|]*\b{PROTECTED}(?![\w-])")
 # git merge|rebase|reset ... <branch>
-MERGE_RE = re.compile(rf"git\s+(?:merge|rebase|reset)\b.*\b{PROTECTED}\b")
+MERGE_RE = re.compile(rf"(?:^|[;&|]\s*)git\s+(?:merge|rebase|reset)\b[^;&|]*\b{PROTECTED}(?![\w-])")
 
 BLOCK_PATTERNS = [CHECKOUT_RE, PUSH_RE, MERGE_RE]
 
@@ -45,8 +49,14 @@ def get_current_branch() -> str | None:
 
 
 def is_git_write(command: str) -> bool:
-    """Return True if the command is a git write operation (commit, push, merge, rebase, reset)."""
-    return bool(re.search(r"git\s+(?:commit|push|merge|rebase|reset)\b", command))
+    """Return True if the command is a git write operation (commit, push, merge, rebase, reset).
+
+    Anchored to command start or after a shell operator (;, &&, ||, |) to avoid
+    false positives from strings like: echo 'git commit'.
+    """
+    return bool(
+        re.search(r"(?:^|[;&|]\s*)git\s+(?:commit|push|merge|rebase|reset)\b", command)
+    )
 
 
 def main() -> None:

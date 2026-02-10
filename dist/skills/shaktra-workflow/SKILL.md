@@ -4,6 +4,7 @@ description: >
   Natural language intent router — classifies user requests and dispatches to the appropriate
   Shaktra workflow skill. Primary entry point for users who prefer natural language over
   direct skill invocation.
+user-invocable: true
 ---
 
 # /shaktra:workflow — Workflow Router

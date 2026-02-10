@@ -4,6 +4,7 @@ description: >
   Codebase Analyzer workflow — brownfield analysis producing structured, token-efficient output
   for downstream agents. 2-stage model: tool-based pre-analysis for ground truth, then parallel
   LLM-driven deep analysis across 9 dimensions. Outputs 13 YAML artifacts to .shaktra/analysis/.
+user-invocable: true
 ---
 
 # /shaktra:analyze — Codebase Analyzer

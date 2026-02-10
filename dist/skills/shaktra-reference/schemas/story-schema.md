@@ -8,6 +8,7 @@ Defines the YAML structure for story files in `.shaktra/stories/`. Fields accumu
 id: string           # "ST-001" — sequential
 title: string        # imperative, ≤100 characters
 description: string  # what and why, 1-3 sentences
+tier: string         # "trivial" | "small" | "medium" | "large" — auto-detected from scope and complexity
 
 metadata:
   story_points: integer    # from [1, 2, 3, 5, 8, 10] — assigned based on tier and complexity

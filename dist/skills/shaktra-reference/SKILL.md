@@ -31,12 +31,14 @@ Agents load this skill via their `skills` frontmatter. Only load the sub-files y
 | `schemas/sprint-schema.md` | Sprint state — velocity tracking, backlog |
 | `schemas/design-doc-schema.md` | Design doc sections — tier-scaled structure |
 | `schemas/refactoring-handoff-schema.md` | Refactoring state machine — phases, transitions, baseline metrics |
+| `schemas/analysis-manifest-schema.md` | Analysis checkpoint — dimension progress, resumability, status transitions |
 
 ## Agent Loading Guide
 
 | Agent Role | Sub-Files Needed |
 |---|---|
-| SW Quality, Code Reviewer | severity-taxonomy, quality-principles, quality-dimensions, schemas/handoff-schema, schemas/decisions-schema |
+| SW Quality | severity-taxonomy, quality-principles, quality-dimensions, schemas/handoff-schema, schemas/decisions-schema |
+| CR Analyzer | severity-taxonomy, quality-principles, quality-dimensions |
 | SW Engineer, Developer | severity-taxonomy, quality-principles, guard-tokens, schemas/handoff-schema, schemas/story-schema |
 | Test Agent | severity-taxonomy, guard-tokens, schemas/handoff-schema |
 | TPM Quality | severity-taxonomy, quality-dimensions, story-tiers, guard-tokens, schemas/design-doc-schema, schemas/story-schema |
@@ -44,5 +46,5 @@ Agents load this skill via their `skills` frontmatter. Only load the sub-files y
 | Architect | quality-principles, quality-dimensions, schemas/design-doc-schema |
 | Memory Curator | schemas/lessons-schema, schemas/handoff-schema |
 | Bug Diagnostician | severity-taxonomy, guard-tokens, schemas/story-schema |
-| CBA Analyzer | quality-principles, schemas/decisions-schema |
+| CBA Analyzer | quality-principles, schemas/decisions-schema, schemas/analysis-manifest-schema |
 | Product Manager | story-tiers, schemas/story-schema, schemas/decisions-schema, schemas/sprint-schema |

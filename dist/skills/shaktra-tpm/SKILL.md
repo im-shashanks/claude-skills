@@ -3,6 +3,7 @@ name: shaktra-tpm
 description: >
   Technical Program Manager workflow — orchestrates design doc creation, user story generation,
   quality review loops, RICE prioritization, and sprint planning. Entry point for all planning work.
+user-invocable: true
 ---
 
 # /shaktra:tpm — Technical Program Manager
@@ -275,6 +276,7 @@ After every workflow, present:
 
 This workflow emits and responds to:
 - `GAPS_FOUND` — architect found gaps, route to PM
+- `PM_ESCALATE` — PM cannot answer from source docs, escalate to user
 - `QUALITY_PASS` / `QUALITY_BLOCKED` — quality review results
 - `MAX_LOOPS_REACHED` — quality loop exhausted, escalate to user
 - `VALIDATION_FAILED` — schema validation failure in story or design doc
