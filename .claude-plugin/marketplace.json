@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "shaktra",
-      "source": ".",
+      "source": "./",
       "description": "Opinionated software development framework with TDD, quality gates, and multi-agent orchestration"
     }
   ]
