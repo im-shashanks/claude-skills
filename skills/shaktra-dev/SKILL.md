@@ -3,6 +3,7 @@ name: shaktra-dev
 description: >
   Software Development Manager workflow — orchestrates TDD pipeline through plan, red, green,
   quality phases with specialized agents. Entry point for all development work.
+user-invocable: true
 ---
 
 # /shaktra:dev — Software Development Manager

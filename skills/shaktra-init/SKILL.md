@@ -3,6 +3,7 @@ name: shaktra-init
 description: >
   Initialize the Shaktra framework in the current project. Creates the .shaktra/ directory
   structure, populates configuration from templates, and sets up the project CLAUDE.md.
+user-invocable: true
 ---
 
 # /shaktra:init — Project Initialization

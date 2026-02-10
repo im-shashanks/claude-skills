@@ -3,6 +3,7 @@ name: shaktra-general
 description: >
   General purpose domain expert — classifies requests into specialist domains, loads on-demand
   expertise, and provides actionable project-contextualized guidance.
+user-invocable: true
 ---
 
 # /shaktra:general — General Purpose Domain Expert

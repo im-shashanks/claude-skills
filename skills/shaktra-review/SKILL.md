@@ -4,6 +4,7 @@ description: >
   Code Reviewer workflow — app-level code review and PR review with independent verification
   testing. Dispatches CR Analyzer agents across quality dimensions and produces evidence-based
   structured reports.
+user-invocable: true
 ---
 
 # /shaktra:review — Code Reviewer

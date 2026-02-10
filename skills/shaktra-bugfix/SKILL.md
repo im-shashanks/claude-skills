@@ -4,6 +4,7 @@ description: >
   Bug Fix workflow — structured diagnosis followed by TDD remediation.
   Investigates bugs through triage, root cause analysis, and blast radius assessment,
   then routes to the standard TDD pipeline for the fix.
+user-invocable: true
 ---
 
 # /shaktra:bugfix — Bug Fix Workflow

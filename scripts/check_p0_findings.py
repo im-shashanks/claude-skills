@@ -5,6 +5,8 @@ Event: Stop (no matcher)
 Exit 0 = allow, Exit 2 = block.
 """
 
+from __future__ import annotations
+
 import glob
 import os
 import sys
@@ -64,7 +66,12 @@ def main() -> None:
         )
         sys.exit(2)
 
-    p0s = [f for f in findings if str(f.get("severity", "")).upper() == "P0"]
+    p0s = [
+        f for f in findings
+        if isinstance(f, dict)
+        and str(f.get("severity", "")).upper() == "P0"
+        and not f.get("resolved", False)
+    ]
     if not p0s:
         sys.exit(0)
 

@@ -43,7 +43,7 @@ Complete TPM workflow — design through sprint planning. This is the default fo
 2. Spawn **architect** with analysis path (if brownfield) — architect reads PRD and architecture from fixed paths `.shaktra/prd.md` and `.shaktra/architecture.md`
 3. Handle architect response:
    - **If `GAPS_FOUND`:** Spawn **product-manager** (mode: gaps) with the gap questions
-     - For each PM answer: if `PM_ESCALATE`, ask user via AskUserQuestion
+     - For each PM answer: if `PM_ESCALATE`, present the question to the user and await their response
      - Re-spawn **architect** with gap answers
      - Repeat until no gaps remain (max 3 gap rounds)
    - **If design doc returned:** Continue to quality review
