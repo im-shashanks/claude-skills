@@ -57,15 +57,13 @@ If manifest does not exist or all stages are incomplete, start fresh.
 
 Check if agent teams are available (TeamCreate tool accessible):
 
-**IF TeamCreate IS available — MANDATORY: follow this path exactly:**
-1. Run Step 4 (Stage 1 — Pre-Analysis) below.
-2. STOP. You will now spawn a team of 4 agents to perform deep codebase analysis. Read the file `deep-analysis-workflow.md` located in this skill's directory NOW. Follow it completely — it defines the team structure, member prompts, and Stages 2, 3, and 4.
-3. After deep-analysis-workflow.md completes, return here and run Step 7 (Update Settings) then Step 9 (Report).
-4. DO NOT read or execute Steps 5 or 6 — they are the fallback path and do not apply when teams are available. Skip directly from Step 4 to Step 7.
+- **IF TeamCreate IS available:** After Step 4 completes, read `deep-analysis-workflow.md`
+  in this skill's directory and follow it completely.
+- **IF TeamCreate IS NOT available:** Warn user: "Teams unavailable — running standard
+  single-session analysis." After Step 4 completes, read `standard-analysis-workflow.md`
+  in this skill's directory and follow it completely.
 
-**IF TeamCreate IS NOT available — fallback path:**
-- Warn user: "Teams unavailable — running enhanced single-session analysis."
-- Proceed with Steps 4 through 9 below (Steps 5-6 are the fallback replacements for Stages 2-3).
+After the chosen workflow file completes, return here and continue with Step 5.
 
 ### Step 4: Stage 1 — Pre-Analysis (Sequential)
 
@@ -97,82 +95,7 @@ Write results to `.shaktra/analysis/overview.yml` with a `summary:` section (~30
 
 Update `manifest.yml` with Stage 1 completion state.
 
----
-
-> **FALLBACK PATH ONLY — Steps 5 and 6 below apply ONLY when TeamCreate is NOT available. If you are using the team-based path (deep-analysis-workflow.md), skip to Step 7.**
-
----
-
-### Step 5: Stage 2 — Parallel Deep Dimensions (FALLBACK ONLY)
-
-Spawn **9 CBA Analyzer agents** in parallel. Each receives its dimension specification from the analysis dimensions files, plus:
-
-- Path to `static.yml` (ground truth input)
-- Path to `overview.yml` (project context)
-- Path to `.shaktra/memory/decisions.yml` (if exists)
-
-**Dispatch all 9 dimensions simultaneously:**
-
-```
-D1: Architecture & Structure        → .shaktra/analysis/structure.yml
-D2: Domain Model & Business Rules   → .shaktra/analysis/domain-model.yml
-D3: Entry Points & Interfaces       → .shaktra/analysis/entry-points.yml
-D4: Coding Practices & Conventions  → .shaktra/analysis/practices.yml
-D5: Dependencies & Tech Stack       → .shaktra/analysis/dependencies.yml
-D6: Technical Debt & Security       → .shaktra/analysis/tech-debt.yml
-D7: Data Flows & Integration        → .shaktra/analysis/data-flows.yml
-D8: Critical Paths & Risk           → .shaktra/analysis/critical-paths.yml
-D9: Git Intelligence                → .shaktra/analysis/git-intelligence.yml
-```
-
-**CBA Analyzer prompt template:**
-
-```
-You are the shaktra-cba-analyzer agent. Execute analysis dimension {dimension_id}.
-
-Dimension: {dimension_name}
-Static data: .shaktra/analysis/static.yml
-Overview: .shaktra/analysis/overview.yml
-Decisions: .shaktra/memory/decisions.yml
-Output path: .shaktra/analysis/{output_file}
-
-Read your dimension specification from analysis-dimensions-core.md (D1-D4), analysis-dimensions-health.md (D5-D8), or analysis-dimensions-git.md (D9).
-Follow the output schema from analysis-output-schemas.md for your artifact format.
-Follow the checks, evidence requirements, and output schema for dimension {dimension_id}. Ground all findings in static.yml data where possible.
-
-Your output file MUST begin with a summary: section (300-600 tokens, self-contained).
-```
-
-After each agent completes, update `manifest.yml` with that dimension's completion state.
-
-### Step 6: Stage 3 — Finalize (FALLBACK ONLY)
-
-**6a. Validate artifacts:**
-- Read each output file in `.shaktra/analysis/`
-- Verify every artifact (except static, manifest, checksum) has a `summary:` key at the top level
-- If any artifact is missing or malformed, report which dimensions need re-execution
-
-**6b. Cross-cutting risk correlation:**
-- Read `tech-debt.yml`, `critical-paths.yml`, and `git-intelligence.yml`
-- If `critical-paths.yml` does not already contain a `cross_cutting_risk` section (D8 may have produced it), compute it: for each file on a critical path, combine debt presence (D6), test coverage (D6), change frequency (D9), and coupling to produce a composite risk score
-- Append `cross_cutting_risk` to `critical-paths.yml` under `details:`
-
-**6c. Generate checksums:**
-- Compute SHA256 of all analyzed source files (from static.yml file inventory)
-- Map each file to the dimensions it was analyzed by
-- Write to `.shaktra/analysis/checksum.yml`
-
-**6d. Generate Mermaid diagrams:**
-- Read `structure.yml` for module relationships
-- Generate architecture diagram showing module dependencies and boundaries
-- Include in `structure.yml` under a `diagrams:` key
-
-**6e. Update manifest:**
-- Set all stages/dimensions to `complete`
-- Record completion timestamp
-- Record analysis version (from plugin.json)
-
-### Step 7: Update Settings from Analysis
+### Step 5: Update Settings from Analysis
 
 After all dimensions are validated, back-fill `settings.project.architecture` if it's currently empty:
 
@@ -186,21 +109,7 @@ After all dimensions are validated, back-fill `settings.project.architecture` if
    - "Detected mixed architecture: {styles}. Please set `project.architecture` in `.shaktra/settings.yml` to the intended target style."
 5. If `project.architecture` is already set: validate it matches the detected patterns. If it conflicts, report the mismatch as a finding.
 
-### Step 8: Memory Capture
-
-Mandatory final step — never skip.
-
-Spawn **shaktra-memory-curator**:
-```
-You are the shaktra-memory-curator agent. Capture lessons from the completed analysis workflow.
-
-Workflow type: analysis
-Artifacts path: .shaktra/analysis/
-
-Extract lessons that meet the capture bar. Append to .shaktra/memory/lessons.yml.
-```
-
-### Step 9: Report Summary
+### Step 6: Report Summary
 
 Display to user:
 
