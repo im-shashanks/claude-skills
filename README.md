@@ -55,14 +55,14 @@ Every implementation follows a strict TDD state machine: **PLAN → RED → GREE
 ### Marketplace (recommended)
 
 ```
-/plugin marketplace add https://github.com/im-shashanks/shaktra-plugin.git
-/plugin install shaktra@shaktra-marketplace
+/plugin marketplace add https://github.com/im-shashanks/claude-skills.git
+/plugin install shaktra@claude-skills-marketplace
 ```
 
 ### Direct from GitHub
 
 ```
-/plugin install https://github.com/im-shashanks/shaktra-plugin.git
+/plugin install https://github.com/im-shashanks/claude-skills.git
 ```
 
 ---
@@ -176,4 +176,4 @@ MIT License. See [LICENSE](LICENSE).
 
 ## Development
 
-Development happens on the [`main`](https://github.com/im-shashanks/shaktra-plugin/tree/main) branch. See the main branch for architecture docs, phase plans, and contribution guidelines.
+Development happens on the [`main`](https://github.com/im-shashanks/claude-skills/tree/main) branch. See the main branch for architecture docs, phase plans, and contribution guidelines.
