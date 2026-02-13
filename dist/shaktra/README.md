@@ -862,6 +862,18 @@ These principles guide Shaktra's design:
 
 ---
 
+## Contributing to Shaktra
+
+Shaktra is developed openly on GitHub. If you'd like to contribute bug fixes, features, or improvements:
+
+1. **Switch to the `main` branch** of the repository
+2. **Read the documentation** in the main branch for development guidelines, architecture, and phase plans
+3. **All development happens from `main`** — create feature branches for your work
+
+The development guide and contribution guidelines are in the main branch, not in this plugin directory. See the repository's README.md and CLAUDE.md files on the main branch for full details.
+
+---
+
 ## License
 
 MIT License. See LICENSE file in repository.
@@ -871,5 +883,5 @@ MIT License. See LICENSE file in repository.
 ## Learn More
 
 - **Getting help:** `/shaktra:help` for commands and examples
-- **Architecture:** See development repository for detailed docs
-- **Contributing:** Development happens on GitHub — see repository for guidelines
+- **Contributing:** See the main branch for development guidelines and contribution process
+- **Architecture:** Full architecture docs are on the main branch
