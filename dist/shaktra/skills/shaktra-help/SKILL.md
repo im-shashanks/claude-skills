@@ -43,6 +43,7 @@ Shaktra orchestrates 12 specialized AI agents through agile-inspired workflows. 
 | `/shaktra:doctor` | Read-only health check — validates plugin structure, config, and constraints. |
 | `/shaktra:workflow` | Natural language router — describe what you need, get dispatched to the right skill. |
 | `/shaktra:help` | This guide. |
+| `/shaktra:status-dash` | Project dashboard — version check, sprint health, quality overview. |
 
 ---
 
