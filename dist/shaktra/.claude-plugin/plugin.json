@@ -2,6 +2,7 @@
   "name": "shaktra",
   "version": "0.1.0",
   "description": "Opinionated software development framework with TDD, quality gates, and multi-agent orchestration",
+  "repository": "https://github.com/im-shashanks/claude-plugins",
   "author": {
     "name": "Shashank"
   },

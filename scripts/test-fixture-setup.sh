@@ -8,7 +8,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
-PLUGIN_DIR="${REPO_ROOT}/shaktra"
+PLUGIN_DIR="${REPO_ROOT}/dist/shaktra"
 TEST_DIR="${HOME}/workspace/project_tests/shaktra-plugin-test"
 CLAUDE_DIR="${TEST_DIR}/.claude"
 
@@ -38,6 +38,7 @@ mkdir -p "$CLAUDE_DIR"
 
 # Copy all contents from shaktra/ to .claude/
 echo "Copying from shaktra/ to .claude/..."
+cp -r "${PLUGIN_DIR}/.claude-plugin" "$CLAUDE_DIR/"
 cp -r "${PLUGIN_DIR}/agents" "$CLAUDE_DIR/"
 cp -r "${PLUGIN_DIR}/skills" "$CLAUDE_DIR/"
 cp -r "${PLUGIN_DIR}/templates" "$CLAUDE_DIR/"
