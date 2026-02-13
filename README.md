@@ -464,7 +464,7 @@ cat dist/shaktra/skills/shaktra-reference/schemas/settings-schema.md
 
 See GitHub releases for changelog and version history.
 
-Current version: **0.1.0**
+Current version: **0.1.2**
 
 ---
 

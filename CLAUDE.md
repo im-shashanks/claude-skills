@@ -98,6 +98,16 @@ Check every file against these before considering any phase complete:
 - No ASCII art in agent/skill prompts
 - No naming ambiguity between components
 
+## Version Bumps
+
+Source of truth: `dist/shaktra/.claude-plugin/plugin.json`
+
+When bumping the plugin version, update these files to match:
+- `dist/shaktra/README.md` — Version table at the top
+- `README.md` — "Current version" near the bottom
+
+Do **not** touch `dist/shaktra/skills/shaktra-status-dash/SKILL.md` — the version in its output format section is an example only. Status-dash reads the real version dynamically from `plugin.json` via `check_version.py`.
+
 ## Git Conventions
 
 - **Never** include a `Co-Authored-By` line in commit messages

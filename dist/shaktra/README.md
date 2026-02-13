@@ -5,7 +5,7 @@ Shaktra turns Claude Code into a full software development team. Instead of a si
 
 | | |
 |---|---|
-| **Version** | 0.1.0 |
+| **Version** | 0.1.2 |
 | **License** | MIT |
 | **Agents** | 12 specialized sub-agents |
 | **Skills** | 16 total (10 user-invocable) |
