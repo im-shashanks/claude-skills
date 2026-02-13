@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Publish the release branch locally.
-# Promotes shaktra/ to root, transforms marketplace.json, validates, and
+# Promotes dist/shaktra/ to root, transforms marketplace.json, validates, and
 # creates/updates the local 'release' branch.
 #
 # Usage: ./scripts/publish-release.sh [--push]

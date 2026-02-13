@@ -90,7 +90,7 @@ Check every file against these before considering any phase complete:
 - No single file over 300 lines
 - No content duplication across layers (skill defines, agent references — never both)
 - No dead code, disabled stubs, or orphaned files
-- Severity taxonomy (P0-P3) defined in exactly ONE file: `shaktra/skills/shaktra-reference/severity-taxonomy.md`
+- Severity taxonomy (P0-P3) defined in exactly ONE file: `dist/shaktra/skills/shaktra-reference/severity-taxonomy.md`
 - All threshold values read from `.shaktra/settings.yml` — never hardcoded
 - All hook scripts in Python (cross-platform, no `grep -oP`)
 - Hooks block or don't exist — no warn-only
