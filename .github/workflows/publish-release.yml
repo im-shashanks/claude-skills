@@ -6,7 +6,7 @@ on:
     paths:
       - 'dist/shaktra/**'
       - '.claude-plugin/marketplace.json'
-      - 'README.md'
+      - 'Resources/**'
 
 permissions:
   contents: write
@@ -51,28 +51,8 @@ jobs:
               json.dumps(data, indent=2) + '\n')
           "
 
-          # Copy README and strip dev-only sections
-          python3 -c "
-          import re, pathlib
-          text = pathlib.Path('README.md').read_text()
-          # Remove 'Local development' install block (### Local development ... blank line after closing backticks)
-          text = re.sub(
-              r'### Local development\n+\`\`\`.*?\`\`\`\n*',
-              '',
-              text,
-              flags=re.DOTALL,
-          )
-          # Remove 'Documentation' footer section
-          text = re.sub(
-              r'\n## Documentation\n.*',
-              '',
-              text,
-              flags=re.DOTALL,
-          )
-          # Add development note at the bottom
-          text = text.rstrip() + '\n\n---\n\n## Development\n\nDevelopment happens on the [\`main\`](https://github.com/im-shashanks/claude-plugins/tree/main) branch. See the main branch for architecture docs, phase plans, and contribution guidelines.\n'
-          pathlib.Path('$BUILD/README.md').write_text(text)
-          "
+          # Copy user-facing README from plugin directory
+          cp dist/shaktra/README.md "$BUILD/README.md"
 
           # Minimal .gitignore
           cat > "$BUILD/.gitignore" << 'GITIGNORE'
