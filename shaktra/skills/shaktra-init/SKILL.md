@@ -73,14 +73,14 @@ Create the following directories:
 
 Read template files from `${CLAUDE_PLUGIN_ROOT}/templates/` and write them into `.shaktra/`:
 
-| Template Source | Destination | Post-Processing |
-|---|---|---|
-| `templates/settings.yml` | `.shaktra/settings.yml` | Replace empty `project:` fields with user's answers from Step 2 |
-| `templates/decisions.yml` | `.shaktra/memory/decisions.yml` | Copy as-is |
-| `templates/lessons.yml` | `.shaktra/memory/lessons.yml` | Copy as-is |
-| `templates/sprints.yml` | `.shaktra/sprints.yml` | Copy as-is |
-| `templates/analysis-manifest.yml` | `.shaktra/analysis/manifest.yml` | Copy as-is |
-| `templates/shaktra-CLAUDE.md` | `.shaktra/CLAUDE.md` | Copy as-is (project state documentation) |
+**All 6 template files must be copied.** Read each from `${CLAUDE_PLUGIN_ROOT}/templates/` and write to `.shaktra/`:
+
+1. `templates/settings.yml` → `.shaktra/settings.yml` — Replace empty `project:` fields with user's answers from Step 2
+2. `templates/decisions.yml` → `.shaktra/memory/decisions.yml` — Copy as-is
+3. `templates/lessons.yml` → `.shaktra/memory/lessons.yml` — Copy as-is
+4. `templates/sprints.yml` → `.shaktra/sprints.yml` — Copy as-is
+5. `templates/analysis-manifest.yml` → `.shaktra/analysis/manifest.yml` — Copy as-is
+6. `templates/shaktra-CLAUDE.md` → `.shaktra/CLAUDE.md` — Copy as-is (project state documentation — describes what `.shaktra/` contains)
 
 For `settings.yml`, populate the `project:` section with the gathered values:
 
