@@ -16,6 +16,7 @@ This project uses the **Shaktra** development framework — an opinionated workf
 | `/shaktra:init` | Initialize Shaktra in a project |
 | `/shaktra:doctor` | Diagnose framework health and configuration issues |
 | `/shaktra:workflow` | Auto-route to the right agent based on intent |
+| `/shaktra:status-dash` | Project dashboard — version, sprint, stories, quality overview |
 
 ## Routing
 
