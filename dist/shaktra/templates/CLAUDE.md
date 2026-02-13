@@ -1,6 +1,6 @@
 # PROJECT_NAME Development
 
-**Guidance:** This file documents your specific project — architecture decisions, conventions, development workflow, and team context. It's not about Shaktra itself (see `.shaktra/framework-reference.md` for Shaktra documentation).
+**Guidance:** This file documents your specific project — architecture decisions, conventions, development workflow, and team context. For Shaktra framework documentation, see `.shaktra/CLAUDE.md`.
 
 **Getting started:** Run `/shaktra:init CLAUDE.md` to have Claude fill in these sections with your project details.
 
@@ -159,7 +159,7 @@ Important architectural and design decisions are recorded in `.shaktra/memory/de
 
 ### Getting Help
 
-- **Framework questions:** See `.shaktra/framework-reference.md`
+- **Framework questions:** See `.shaktra/CLAUDE.md`
 - **Project questions:** Ask team members or check decision log
 - **Technical questions:** Check this CLAUDE.md or raise an issue
 
@@ -167,7 +167,7 @@ Important architectural and design decisions are recorded in `.shaktra/memory/de
 
 ## Resources
 
-- **Framework docs:** `.shaktra/framework-reference.md` — Shaktra framework reference
+- **Framework docs:** `.shaktra/CLAUDE.md` — Shaktra framework reference (commands, workflows, quality tiers)
 - **Decisions:** `.shaktra/memory/decisions.yml` — Architectural decisions (append-only)
 - **Lessons learned:** `.shaktra/memory/lessons.yml` — Team learnings (append-only)
 - **Sprint state:** `.shaktra/sprints.yml` — Current sprint and velocity

@@ -80,7 +80,7 @@ Read template files from `${CLAUDE_PLUGIN_ROOT}/templates/` and write them into 
 | `templates/lessons.yml` | `.shaktra/memory/lessons.yml` | Copy as-is |
 | `templates/sprints.yml` | `.shaktra/sprints.yml` | Copy as-is |
 | `templates/analysis-manifest.yml` | `.shaktra/analysis/manifest.yml` | Copy as-is |
-| `templates/framework-reference.md` | `.shaktra/framework-reference.md` | Copy as-is |
+| `templates/shaktra-CLAUDE.md` | `.shaktra/CLAUDE.md` | Copy as-is (Shaktra framework reference) |
 
 For `settings.yml`, populate the `project:` section with the gathered values:
 
@@ -114,7 +114,9 @@ This template is a skeleton for documenting the **specific project** (architectu
 - Decision log (referencing `.shaktra/memory/decisions.yml`)
 - Contributing guidelines
 
-The template also mentions that users can run `/shaktra:init CLAUDE.md` to have Claude fill in the sections with project details.
+**Note:** The Shaktra framework documentation is stored in `.shaktra/CLAUDE.md` (separate file).
+
+The template also mentions that users can run `/shaktra:init CLAUDE.md` to have Claude fill in the sections with project-specific details.
 
 **If no CLAUDE.md exists** in the project root:
 - Create `CLAUDE.md` with the template content.
@@ -137,9 +139,9 @@ Coverage Tool: <coverage_tool>
 Package Manager: <package_manager>
 
 Created:
+  .shaktra/CLAUDE.md                    # Shaktra framework reference
   .shaktra/settings.yml
   .shaktra/sprints.yml
-  .shaktra/framework-reference.md        # Shaktra framework docs (for reference)
   .shaktra/memory/decisions.yml
   .shaktra/memory/lessons.yml
   .shaktra/analysis/manifest.yml
@@ -151,9 +153,8 @@ Created:
 
 Next steps:
   1. Update CLAUDE.md with your project-specific information (or run `/shaktra:init CLAUDE.md` for Claude to do it)
-  2. Review .shaktra/settings.yml and adjust thresholds if needed
-  3. For brownfield projects: run /shaktra:analyze to understand the existing codebase
-  4. Run /shaktra:tpm to create design docs and stories
-
-For Shaktra framework reference: see .shaktra/framework-reference.md
+  2. For Shaktra framework reference: see .shaktra/CLAUDE.md
+  3. Review .shaktra/settings.yml and adjust thresholds if needed
+  4. For brownfield projects: run /shaktra:analyze to understand the existing codebase
+  5. Run /shaktra:tpm to create design docs and stories
 ```
