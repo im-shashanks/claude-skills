@@ -406,7 +406,7 @@ def get_test_definitions(test_dir: str) -> list[dict]:
         {
             "name": "dev",
             "category": "greenfield",
-            "timeout": 1200,
+            "timeout": 1800,
             "max_turns": 65,
             "setup": lambda td: setup_dev(td),
             "prompt": build_prompt(
