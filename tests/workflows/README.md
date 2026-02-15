@@ -242,7 +242,7 @@ Together, these give you full visibility into what's happening — which agents 
 | `init-greenfield` | greenfield | `.shaktra/` structure, settings, templates | 5m | 15 |
 | `pm` | greenfield | PRD creation, personas, journey maps | 15m | 30 |
 | `tpm` | greenfield | Design doc, quality review, stories, sprints, memory | 25m | 60 |
-| `dev` | greenfield | TDD pipeline: plan, branch, tests, code, quality | 20m | 65 |
+| `dev` | greenfield | TDD pipeline: plan, branch, tests, code, quality | 30m | 65 |
 | `review` | greenfield | Code review findings, verdict, memory capture | 15m | 35 |
 | `tpm-hotfix` | hotfix | Trivial-tier story creation, no sprint allocation | 10m | 30 |
 | `init-brownfield` | brownfield | `.shaktra/` for existing project | 5m | 15 |
@@ -281,6 +281,8 @@ Each test's setup function prepares the exact `.shaktra/` state it needs:
 | Full suite (all 19 tests) | 60-90 min | ~$10-20 |
 
 Costs depend on model choice. Using `--model claude-sonnet-4-5-20250929` is recommended for testing (good balance of speed and capability). Opus is more capable but slower and more expensive.
+
+> **Be patient with long-running workflows.** Tests like `dev` (30 min timeout), `tpm` (25 min), and `bugfix` (15 min) involve multiple sub-agents, quality review loops, and code generation — these take real time. Execution speed also varies with API latency, model load, and network conditions. **Do not kill a test just because it appears quiet for a few minutes** — quality review and code generation phases often have long gaps between log entries while the model is thinking. Use the live log (`tail -f`) to confirm the test is still progressing. If a test genuinely stalls (no new log entries for 5+ minutes), it will eventually hit its timeout and be killed automatically.
 
 ## How It Works
 
