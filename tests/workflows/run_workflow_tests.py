@@ -10,6 +10,7 @@ Usage:
     python3 run_workflow_tests.py --smoke           # Smoke tests only
     python3 run_workflow_tests.py --test tpm        # Single test
     python3 run_workflow_tests.py --group greenfield # Test group
+    python3 run_workflow_tests.py --negative        # Negative tests only
     python3 run_workflow_tests.py --list            # List available tests
 """
 
@@ -30,11 +31,9 @@ from test_runner import LOG_FILE, TestResult, cleanup_orphan_teams, run_test
 
 REPORTS_DIR = Path(__file__).resolve().parent / "reports"
 
-# Test groups that share a directory (run sequentially in same temp dir)
-SHARED_DIR_GROUPS = {
-    "greenfield": ["init-greenfield", "pm", "tpm", "dev", "review"],
-    "brownfield": ["init-brownfield", "analyze"],
-}
+ALL_CATEGORIES = [
+    "smoke", "greenfield", "brownfield", "hotfix", "bugfix", "negative",
+]
 
 
 def main() -> int:
@@ -49,7 +48,7 @@ def main() -> int:
     # Cleanup any orphan test teams from prior runs
     cleanup_orphan_teams("test-")
 
-    # Get test definitions (test_dir placeholder — resolved per group)
+    # Get test definitions (test_dir placeholder — resolved per test)
     all_tests = get_test_definitions("{TEST_DIR}")
 
     # Filter tests
@@ -84,28 +83,22 @@ def main() -> int:
 def _run_selected_tests(
     selected: list[dict], temp_dirs: list[Path], model: str = "",
 ) -> list[TestResult]:
-    """Run tests, sharing dirs within groups."""
+    """Run tests — each test gets its own fresh temp dir."""
     results = []
-    group_dirs: dict[str, Path] = {}
 
     for test_def in selected:
         category = test_def["category"]
-        group_key = _find_group(test_def["name"])
 
-        # Resolve test directory
-        if group_key and group_key in group_dirs:
-            test_dir = group_dirs[group_key]
-        else:
-            test_dir = Path(tempfile.mkdtemp(prefix=f"shaktra-test-{category}-"))
-            temp_dirs.append(test_dir)
-            # Git init for fresh dirs
-            subprocess.run(["git", "init"], cwd=test_dir, capture_output=True)
-            subprocess.run(
-                ["git", "commit", "--allow-empty", "-m", "initial"],
-                cwd=test_dir, capture_output=True,
-            )
-            if group_key:
-                group_dirs[group_key] = test_dir
+        # Every test gets its own fresh temp dir
+        test_dir = Path(tempfile.mkdtemp(prefix=f"shaktra-test-{category}-"))
+        temp_dirs.append(test_dir)
+
+        # Git init for fresh dir
+        subprocess.run(["git", "init"], cwd=test_dir, capture_output=True)
+        subprocess.run(
+            ["git", "commit", "--allow-empty", "-m", "initial"],
+            cwd=test_dir, capture_output=True,
+        )
 
         # Setup
         if test_def.get("setup"):
@@ -142,20 +135,14 @@ def _run_selected_tests(
     return results
 
 
-def _find_group(test_name: str) -> str | None:
-    """Find which shared-dir group a test belongs to."""
-    for group, members in SHARED_DIR_GROUPS.items():
-        if test_name in members:
-            return group
-    return None
-
-
 def _filter_tests(all_tests: list[dict], args: argparse.Namespace) -> list[dict]:
     """Filter test list based on CLI args."""
     if args.test:
         return [t for t in all_tests if t["name"] == args.test]
     if args.smoke:
         return [t for t in all_tests if t["category"] == "smoke"]
+    if args.negative:
+        return [t for t in all_tests if t["category"] == "negative"]
     if args.group:
         return [t for t in all_tests if t["category"] == args.group]
     return all_tests
@@ -171,7 +158,7 @@ def _print_summary(results: list[TestResult]) -> None:
         icon = "pass" if r.passed else r.verdict.lower()
         dur = f"{r.duration_secs:.0f}s"
         err = f" ({r.error})" if r.error else ""
-        print(f"  [{icon:>7}] {r.name:<20} {dur:>6}{err}", file=sys.stderr)
+        print(f"  [{icon:>7}] {r.name:<25} {dur:>6}{err}", file=sys.stderr)
 
     passed = sum(1 for r in results if r.passed)
     total = len(results)
@@ -232,9 +219,18 @@ def list_tests() -> int:
     """Print available tests and exit."""
     tests = get_test_definitions("/tmp/example")
     print("Available tests:\n")
+
+    current_cat = ""
     for t in tests:
-        print(f"  {t['name']:<20} [{t['category']}] timeout={t['timeout']}s")
-    print(f"\nGroups: {', '.join(SHARED_DIR_GROUPS.keys())}, smoke, hotfix, bugfix")
+        if t["category"] != current_cat:
+            current_cat = t["category"]
+            print(f"\n  [{current_cat}]")
+        print(f"    {t['name']:<25} timeout={t['timeout']}s  turns={t['max_turns']}")
+
+    print(f"\nCategories: {', '.join(ALL_CATEGORIES)}")
+    total = len(tests)
+    neg = sum(1 for t in tests if t["category"] == "negative")
+    print(f"Total: {total} tests ({total - neg} positive, {neg} negative)")
     return 0
 
 
@@ -243,6 +239,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--test", help="Run a single test by name")
     p.add_argument("--group", help="Run a test group (greenfield, brownfield, etc.)")
     p.add_argument("--smoke", action="store_true", help="Run smoke tests only")
+    p.add_argument("--negative", action="store_true", help="Run negative tests only")
     p.add_argument("--list", action="store_true", help="List available tests")
     p.add_argument("--keep-dirs", action="store_true",
                    help="Keep temp directories after tests")

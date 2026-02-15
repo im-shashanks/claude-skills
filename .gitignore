@@ -219,3 +219,7 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Test workflow caches
+tests/workflows/__pycache__/
+tests/workflows/validators/__pycache__/

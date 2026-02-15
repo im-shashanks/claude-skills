@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Validators for /shaktra:bugfix workflow.
-
-Checks that bug diagnosis was produced and a fix was implemented.
-"""
-
+"""Validators for /shaktra:bugfix workflow."""
 from __future__ import annotations
 
 import os
@@ -13,11 +9,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from validate_common import (
-    ValidationReport,
-    check_exists,
-    check_is_dir,
-    check_is_file,
-    print_report,
+    ValidationReport, check_is_file, check_valid_yaml, print_report,
 )
 
 
@@ -28,21 +20,14 @@ def validate_bugfix(project_dir: str) -> ValidationReport:
     # --- Source files modified ---
     src_file = os.path.join(project_dir, "src", "calculator.py")
     if check_is_file(report, src_file, "calculator.py exists"):
-        content = Path(src_file).read_text()
-        # Check the fix addresses zero division
-        has_fix = any(
-            kw in content.lower()
-            for kw in ["valueerror", "zero", "if b == 0", "if not b", "b == 0"]
-        )
-        report.add(
-            "fix addresses zero division",
-            has_fix,
-            "no zero-division handling found in source" if not has_fix else "",
-        )
+        src = Path(src_file).read_text().lower()
+        has_fix = any(k in src for k in ["valueerror", "zero", "if b == 0", "b == 0"])
+        report.add("fix addresses zero division", has_fix,
+                    "no zero-division handling found" if not has_fix else "")
 
     # --- Tests pass ---
-    test_file = os.path.join(project_dir, "tests", "test_calculator.py")
-    check_is_file(report, test_file, "test file exists")
+    check_is_file(report, os.path.join(project_dir, "tests", "test_calculator.py"),
+                  "test file exists")
 
     try:
         result = subprocess.run(
@@ -61,25 +46,73 @@ def validate_bugfix(project_dir: str) -> ValidationReport:
 
     # --- Shaktra state ---
     shaktra = os.path.join(project_dir, ".shaktra")
-    if os.path.isdir(shaktra):
-        # Bugfix may create a story or update memory
+    has_shaktra = os.path.isdir(shaktra)
+    if has_shaktra:
         stories = list(Path(shaktra).glob("stories/ST-*.yml"))
-        report.add(
-            "bugfix story or artifact created",
-            len(stories) > 0 or os.path.isfile(
-                os.path.join(shaktra, "memory", "lessons.yml")),
-            "no stories or memory updates found",
-        )
+        report.add("bugfix story or artifact created",
+                    len(stories) > 0 or os.path.isfile(
+                        os.path.join(shaktra, "memory", "lessons.yml")),
+                    "no stories or memory updates found")
+
+    # --- Diagnosis artifact ---
+    diag_exists = (has_shaktra and (
+        os.path.isdir(os.path.join(shaktra, "diagnosis"))
+        or list(Path(shaktra).glob("*diagnosis*"))
+        or list(Path(shaktra).glob("*bug-report*"))))
+    report.add("diagnosis artifact exists", bool(diag_exists),
+               "no diagnosis directory or files found" if not diag_exists else "")
+
+    # --- Story creation with bug scope ---
+    bug_story = False
+    sdir = os.path.join(shaktra, "stories") if has_shaktra else ""
+    if os.path.isdir(sdir):
+        for sf in Path(sdir).glob("*.y*ml"):
+            try:
+                if "bug" in sf.read_text().lower():
+                    bug_story = True
+                    break
+            except Exception:
+                pass
+    report.add("bugfix story created", bug_story,
+               "no story mentioning 'bug' found" if not bug_story else "")
+
+    # --- Root cause identification ---
+    rc_found = False
+    if has_shaktra:
+        for rt, _, fnames in os.walk(shaktra):
+            for fn in fnames:
+                if fn.endswith((".yml", ".yaml", ".md")):
+                    try:
+                        txt = Path(os.path.join(rt, fn)).read_text().lower()
+                        if "root_cause" in txt or "root cause" in txt:
+                            rc_found = True
+                    except Exception:
+                        pass
+                if rc_found:
+                    break
+            if rc_found:
+                break
+    report.add("root cause identified", rc_found,
+               "no root cause reference in .shaktra/" if not rc_found else "")
+
+    # --- Memory: bugfix lessons ---
+    lp = os.path.join(shaktra, "memory", "lessons.yml") if has_shaktra else ""
+    if os.path.isfile(lp):
+        ld = check_valid_yaml(report, lp, "lessons.yml valid YAML")
+        if isinstance(ld, dict):
+            entries = ld.get("lessons", []) or []
+            bl = [e for e in entries if isinstance(e, dict)
+                  and any(k in str(e.get("source", "")).lower()
+                          for k in ["bugfix", "bug"])]
+            report.add("bugfix lessons captured", len(bl) > 0,
+                       f"no bugfix source lessons (total: {len(entries)})"
+                       if not bl else "")
 
     return report
 
 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: validate_bugfix.py <project_dir>")
-        sys.exit(2)
-    r = validate_bugfix(sys.argv[1])
-    sys.exit(print_report(r))
+        print("Usage: validate_bugfix.py <project_dir>"); sys.exit(2)
+    sys.exit(print_report(validate_bugfix(sys.argv[1])))

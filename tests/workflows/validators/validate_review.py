@@ -63,6 +63,7 @@ def validate_review(project_dir: str, story_id: str) -> ValidationReport:
     # Not required — review may only update handoff.yml
 
     # --- Memory capture ---
+    lessons = None
     lessons_path = os.path.join(shaktra, "memory", "lessons.yml")
     if check_is_file(report, lessons_path, "lessons.yml exists"):
         lessons = check_valid_yaml(report, lessons_path, "lessons.yml valid YAML")
@@ -72,6 +73,28 @@ def validate_review(project_dir: str, story_id: str) -> ValidationReport:
                 "lessons.yml has entries",
                 isinstance(entries, list) and len(entries) > 0,
                 f"found {len(entries) if isinstance(entries, list) else 0} entries",
+            )
+
+    # --- Review findings output ---
+    all_review = list(Path(story_dir).glob("*review*")) + list(
+        Path(story_dir).glob("*findings*"))
+    report.add(
+        "review produced findings or artifacts",
+        bool(findings) or bool(all_review),
+        "no findings in handoff and no review artifact files"
+        if not findings and not all_review else "",
+    )
+
+    # --- Memory: lessons have source attribution ---
+    if lessons:
+        entries = lessons.get("lessons", [])
+        if isinstance(entries, list) and entries:
+            has_source = any(
+                isinstance(e, dict) and e.get("source") for e in entries)
+            report.add(
+                "lessons have source attribution",
+                has_source,
+                "no lessons have a source field" if not has_source else "",
             )
 
     return report
