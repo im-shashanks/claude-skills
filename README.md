@@ -448,29 +448,13 @@ git push origin feat/detect-hardcoded-credentials
 
 ### Testing Philosophy
 
-**What to test:**
+Shaktra has three testing layers:
 
-1. **Hook scripts** (unit tests)
-   - All Python scripts in `dist/shaktra/scripts/`
-   - Test valid/invalid inputs
-   - Test error messages
-   - Run: `python3 -m pytest dist/shaktra/scripts/`
-
-2. **Workflows** (integration tests)
-   - End-to-end user scenarios
-   - Initialize → TPM → Dev → Review
-   - Test in real Claude Code environment
-
-3. **Plugin discovery** (release tests)
-   - Install from local path
-   - Install from GitHub remote
-   - Verify marketplace discovery
-   - Check README is user-facing
-
-**Why we test:**
-- Hooks are enforcement layer — they MUST be reliable
-- Workflows are user experience — they MUST work end-to-end
-- Plugin discovery is distribution — it MUST install correctly
+| Layer | What | Speed | Cost |
+|-------|------|-------|------|
+| **Hook unit tests** | Python scripts in `dist/shaktra/scripts/` | Fast (seconds) | Free |
+| **L1-L4 Audit** | Static checks — file structure, references, schemas | Fast (seconds) | Free |
+| **L5 Workflow tests** | Live end-to-end skill execution with real sub-agents | Slow (minutes) | API costs |
 
 **How we test:**
 
@@ -478,20 +462,21 @@ git push origin feat/detect-hardcoded-credentials
 # Unit tests (fast, during development)
 python3 -m pytest dist/shaktra/scripts/
 
-# Integration tests (moderate, before PR)
-mkdir test-project && cd test-project
-claude --plugin-dir /path/to/shaktra-plugin/dist/shaktra/
+# Automated workflow tests (moderate, before PR)
+python3 tests/workflows/run_workflow_tests.py --smoke        # Smoke tests (~2 min)
+python3 tests/workflows/run_workflow_tests.py --test tpm     # Single workflow (~20 min)
+python3 tests/workflows/run_workflow_tests.py                # Full suite (~60-90 min)
+
+# Manual integration (ad-hoc)
+claude --plugin-dir dist/shaktra/
 /shaktra:init
 /shaktra:tpm "add user auth"
-/shaktra:dev ST-001
 
 # Release tests (slow, before publish)
 ./scripts/publish-release.sh
-git checkout release
-cat README.md  # Should be user-facing, not this maintainer README
-ls -la | grep CLAUDE  # Should NOT exist
-cat .claude-plugin/plugin.json  # Should exist
 ```
+
+See `tests/workflows/README.md` for full documentation on the automated test framework, available tests, debugging, and cost expectations.
 
 ---
 
