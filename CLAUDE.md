@@ -11,6 +11,7 @@ This is a **Claude Code plugin** (NOT a regular project). The directory layout f
 dist/shaktra/                    # THE PLUGIN — all plugin code lives here
   .claude-plugin/plugin.json     # Plugin manifest (required)
   agents/                        # Sub-agent definitions
+  commands/                      # Slash commands (non-namespaced)
   skills/                        # Skill definitions
   hooks/hooks.json               # Hook configurations
   scripts/                       # Hook implementation scripts (Python)
@@ -115,4 +116,5 @@ Do **not** touch `dist/shaktra/skills/shaktra-status-dash/SKILL.md` — the vers
 **5 Utility Skills:** `/shaktra:init`, `/shaktra:doctor`, `/shaktra:workflow`, `/shaktra:help`, `/shaktra:status-dash`
 **4 Internal Skills:** shaktra-quality, shaktra-tdd, shaktra-reference, shaktra-stories
 **12 Sub-Agents:** architect, tpm-quality, scrummaster, product-manager, sw-engineer, test-agent, developer, sw-quality, cba-analyzer, cr-analyzer, memory-curator, bug-diagnostician
+**1 Command:** `/shaktra-update`
 **4 Hooks:** block-main-branch, check-p0, validate-story-scope, validate-schema
