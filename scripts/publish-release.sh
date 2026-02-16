@@ -42,10 +42,6 @@ echo "Building release tree..."
 # Copy entire dist/ structure as-is (preserves plugin organization)
 cp -r dist/* "$BUILD/"
 
-# Copy workflow diagram for README
-mkdir -p "$BUILD/Resources"
-cp Resources/workflow.drawio.png "$BUILD/Resources/"
-
 # Remove __pycache__ if copied
 find "$BUILD" -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 
@@ -131,7 +127,7 @@ if [ ! -f "$BUILD/shaktra/hooks/hooks.json" ]; then
 fi
 
 # No dev-only files
-for devfile in CLAUDE.md docs .claude .local .venv dist; do
+for devfile in CLAUDE.md docs tests Resources .shaktra-test.log .claude .local .venv dist; do
   if [ -e "$BUILD/$devfile" ]; then
     echo "  FAIL: dev-only '$devfile' found in release build"
     errors=$((errors + 1))
@@ -176,10 +172,11 @@ fi
 git checkout main
 
 if $PUSH; then
-  git push origin release
+  # Force push required — release is an orphan branch rebuilt from scratch each time
+  git push --force origin release
   echo "Pushed release branch to origin"
 else
   echo ""
   echo "Release branch updated locally. To push:"
-  echo "  git push origin release"
+  echo "  git push --force origin release"
 fi
