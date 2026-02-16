@@ -2,30 +2,6 @@
 
 Shaktra is an opinionated software development framework distributed as a Claude Code plugin. It orchestrates specialized AI agents through agile-inspired workflows to produce industry-standard, reliable, production code.
 
-## How We Work on This Project
-
-This is a **collaborative build**. For every aspect of Shaktra:
-
-1. **Reference Forge first** — Before building any component, review the corresponding Forge implementation at `~/workspace/applications/forge-claudify`. Understand what exists, what worked, what didn't.
-2. **Discuss before implementing** — Present findings, propose the Shaktra approach, discuss tradeoffs. No implementation until we've aligned on the approach.
-3. **Implement after agreement** — Only after discussion, build the component following the agreed design.
-4. **Validate against constraints** — Check every deliverable against the design constraints below.
-
-## Starting a Phase
-
-When the user says "work on Phase X" or "let's start Phase X":
-
-1. **Read** `docs/shaktra-plan/high-level.md` — architecture and philosophy context
-2. **Read** `docs/shaktra-plan/architecture-overview.md` — plugin structure, components, constraints
-3. **Read** `docs/shaktra-plan/phases/phase-XX-*.md` — the specific phase file
-4. **Read each Forge file** listed in the phase's Forge Reference table (at `~/workspace/applications/forge-claudify`)
-5. **Present** — what Forge does, what Shaktra should do differently, proposed approach
-6. **Wait for approval** — no implementation until we've aligned
-7. **Validate** — after implementation, check the phase's Validation list AND `docs/shaktra-plan/appendices.md` (Appendix A anti-patterns)
-
-For Forge analysis reference: `docs/Forge-analysis/analysis-report.md`
-For phase index and dependency graph: `docs/shaktra-plan/execution-plan.md`
-
 ## Plugin Structure
 
 This is a **Claude Code plugin** (NOT a regular project). The directory layout follows the plugin spec:
@@ -39,13 +15,17 @@ dist/shaktra/                    # THE PLUGIN — all plugin code lives here
   hooks/hooks.json               # Hook configurations
   scripts/                       # Hook implementation scripts (Python)
   templates/                     # State file templates for /shaktra:init
-  README.md                      # User-facing documentation (ships with plugin)
-docs/                            # Dev-only — architecture, phase plans, Forge analysis
-Resources/                       # Dev-only — diagrams, reference docs
+  docs/                          # User-facing documentation (ships with plugin)
+  diagrams/                      # Workflow diagrams (ships with plugin)
+  README.md                      # User-facing README (ships with plugin)
+tests/                           # Automated E2E test suite (dev-only)
+scripts/                         # Publish/release scripts (dev-only)
+.github/workflows/               # CI pipeline (dev-only)
+README-marketplace.md            # Marketplace catalog description (dev-only)
 CLAUDE.md                        # Dev-only — this file (not installed)
 ```
 
-**All plugin development happens in `dist/shaktra/`.** Dev files (docs, Resources, CLAUDE.md) stay at repo root and are never installed.
+**All plugin development happens in `dist/shaktra/`.** Dev files (docs, tests, scripts, CLAUDE.md) stay at repo root and are never installed.
 
 Skills are namespaced as `/shaktra:skill-name` when installed by users.
 
@@ -53,9 +33,11 @@ Skills are namespaced as `/shaktra:skill-name` when installed by users.
 
 ## Testing the Plugin
 
+### Manual Testing
+
 **Quick dev iteration:** `claude --plugin-dir dist/shaktra/` — loads the plugin directly, no install step. Fast but skips the real install path.
 
-**Full install testing (preferred before marking a phase complete):**
+**Full install testing:**
 
 ```bash
 # Local file path — simulates a real install from a local checkout
@@ -69,7 +51,15 @@ Skills are namespaced as `/shaktra:skill-name` when installed by users.
 /plugin install shaktra@cc-plugins
 ```
 
-Always validate at least the local file path install before finalizing a phase. The `--plugin-dir` flag is convenient for rapid iteration but does not exercise the install/discovery pipeline.
+### Automated Tests
+
+The `tests/workflows/` directory contains 19 E2E tests covering all skills (happy path and error scenarios). Run them with:
+
+```bash
+cd tests/workflows && python3 run_workflow_tests.py
+```
+
+CI runs these automatically via `.github/workflows/publish-release.yml` on pushes to the release branch.
 
 ## Key Design Decisions
 
@@ -78,14 +68,13 @@ These were explicitly chosen and must not be overridden:
 - **Full persona descriptions** for all agents (detailed experience-based identity)
 - **Full sprint planning** with velocity tracking and capacity planning
 - **SW Quality and Code Reviewer are separate** — SW Quality checks story-level during TDD, Code Reviewer checks app-level after completion and reviews PRs
-- **Quality depth must match or exceed Forge** — we reduce bloat, not capability
 - **Plugin distribution** via `/plugin install shaktra` (marketplace.json at `.claude-plugin/marketplace.json`)
-- **dist/shaktra/ is the plugin** — Claude Code has no include/exclude mechanism for plugin installs, so all plugin code lives directly in `dist/shaktra/`. Marketplace.json uses `"source": "./dist/shaktra"` to scope what gets installed. Dev files (docs/, Resources/, CLAUDE.md) stay at repo root and are never shipped.
-- **Multi-plugin marketplace** — The repo is structured as a marketplace (`claude-plugins`) where Shaktra is one plugin. Future plugins can be added as sibling directories (e.g., `another-plugin/`).
+- **dist/shaktra/ is the plugin** — Claude Code has no include/exclude mechanism for plugin installs, so all plugin code lives directly in `dist/shaktra/`. Marketplace.json uses `"source": "./dist/shaktra"` to scope what gets installed. Dev files stay at repo root and are never shipped.
+- **Multi-plugin marketplace** — The repo is structured as a marketplace where Shaktra is one plugin. Future plugins can be added as sibling directories.
 
 ## Design Constraints
 
-Check every file against these before considering any phase complete:
+Check every file against these:
 
 - No single file over 300 lines
 - No content duplication across layers (skill defines, agent references — never both)
@@ -105,9 +94,16 @@ Source of truth: `dist/shaktra/.claude-plugin/plugin.json`
 When bumping the plugin version, update these files to match:
 - `dist/shaktra/README.md` — Version table at the top
 - `README.md` — "Current version" near the bottom
+- `README-marketplace.md` — Version reference
 - `CHANGELOG.md` — Add a new version entry with release notes
 
 Do **not** touch `dist/shaktra/skills/shaktra-status-dash/SKILL.md` — the version in its output format section is an example only. Status-dash reads the real version dynamically from `plugin.json` via `check_version.py`.
+
+## Release Process
+
+- **Local publish:** `scripts/publish-release.sh` — builds the release branch (orphan branch with only `dist/shaktra/` contents), tags, and pushes.
+- **CI publish:** `.github/workflows/publish-release.yml` — runs E2E tests and publishes on push to the release branch.
+- **Release branch strategy:** The release branch is an orphan branch containing only the plugin directory contents. It is auto-generated by the publish script — never commit to it directly.
 
 ## Git Conventions
 
@@ -115,8 +111,8 @@ Do **not** touch `dist/shaktra/skills/shaktra-status-dash/SKILL.md` — the vers
 
 ## Component Overview
 
-**6 Main Agent Skills:** `/shaktra:tpm`, `/shaktra:dev`, `/shaktra:review`, `/shaktra:analyze`, `/shaktra:general`, `/shaktra:bugfix`
-**4 Utility Skills:** `/shaktra:init`, `/shaktra:doctor`, `/shaktra:workflow`, `/shaktra:help`
+**7 Main Agent Skills:** `/shaktra:tpm`, `/shaktra:dev`, `/shaktra:review`, `/shaktra:analyze`, `/shaktra:general`, `/shaktra:bugfix`, `/shaktra:pm`
+**5 Utility Skills:** `/shaktra:init`, `/shaktra:doctor`, `/shaktra:workflow`, `/shaktra:help`, `/shaktra:status-dash`
 **4 Internal Skills:** shaktra-quality, shaktra-tdd, shaktra-reference, shaktra-stories
 **12 Sub-Agents:** architect, tpm-quality, scrummaster, product-manager, sw-engineer, test-agent, developer, sw-quality, cba-analyzer, cr-analyzer, memory-curator, bug-diagnostician
 **4 Hooks:** block-main-branch, check-p0, validate-story-scope, validate-schema
