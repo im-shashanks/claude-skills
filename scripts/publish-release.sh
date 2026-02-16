@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
 # Publish the release branch locally.
-# Promotes dist/shaktra/ to root, transforms marketplace.json, validates, and
+# Mirrors the CI workflow (.github/workflows/publish-release.yml) for local use.
+# Copies dist/ structure as-is, transforms marketplace.json, validates, and
 # creates/updates the local 'release' branch.
 #
 # Usage: ./scripts/publish-release.sh [--push]
@@ -38,43 +39,34 @@ mkdir "$BUILD"
 
 echo "Building release tree..."
 
-# Promote dist/shaktra/ contents to root
-cp -r dist/shaktra/agents "$BUILD/"
-cp -r dist/shaktra/skills "$BUILD/"
-cp -r dist/shaktra/hooks "$BUILD/"
-cp -r dist/shaktra/scripts "$BUILD/"
-cp -r dist/shaktra/templates "$BUILD/"
-cp dist/shaktra/LICENSE "$BUILD/"
+# Copy entire dist/ structure as-is (preserves plugin organization)
+cp -r dist/* "$BUILD/"
 
-# Copy documentation referenced by README
-cp -r dist/shaktra/docs "$BUILD/"
-cp -r dist/shaktra/diagrams "$BUILD/"
-
-# Copy workflow diagram for README (legacy path)
+# Copy workflow diagram for README
 mkdir -p "$BUILD/Resources"
 cp Resources/workflow.drawio.png "$BUILD/Resources/"
 
 # Remove __pycache__ if copied
 find "$BUILD" -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 
-# .claude-plugin with both files
+# Transform marketplace.json: source "./dist/shaktra" -> "./shaktra"
 mkdir -p "$BUILD/.claude-plugin"
-cp dist/shaktra/.claude-plugin/plugin.json "$BUILD/.claude-plugin/"
-
-# Transform marketplace.json: source "./dist/shaktra" -> "."
 python3 -c "
 import json, pathlib
 p = pathlib.Path('.claude-plugin/marketplace.json')
 data = json.loads(p.read_text())
 for plugin in data.get('plugins', []):
     if plugin.get('source') == './dist/shaktra':
-        plugin['source'] = '.'
+        plugin['source'] = './shaktra'
 (pathlib.Path('$BUILD') / '.claude-plugin' / 'marketplace.json').write_text(
     json.dumps(data, indent=2) + '\n')
 "
 
-# Copy user-facing README from plugin directory
-cp dist/shaktra/README.md "$BUILD/README.md"
+# Copy marketplace README for release branch root
+cp README-marketplace.md "$BUILD/README.md"
+
+# Copy CHANGELOG for user visibility
+cp CHANGELOG.md "$BUILD/CHANGELOG.md"
 
 # Minimal .gitignore
 cat > "$BUILD/.gitignore" << 'GITIGNORE'
@@ -91,55 +83,55 @@ GITIGNORE
 echo "Validating release structure..."
 errors=0
 
-if [ ! -f "$BUILD/.claude-plugin/plugin.json" ]; then
-  echo "  FAIL: plugin.json missing"
+# marketplace.json exists at root
+if [ ! -f "$BUILD/.claude-plugin/marketplace.json" ]; then
+  echo "  FAIL: marketplace.json missing"
   errors=$((errors + 1))
 fi
 
-source_val=$(python3 -c "
+# Validate each plugin listed in marketplace.json
+plugin_count=$(python3 -c "
 import json
 data = json.load(open('$BUILD/.claude-plugin/marketplace.json'))
-print(data['plugins'][0]['source'])
+print(len(data.get('plugins', [])))
 ")
-if [ "$source_val" != "." ]; then
-  echo "  FAIL: marketplace.json source is '$source_val', expected '.'"
+echo "Found $plugin_count plugin(s)"
+
+# Check shaktra plugin structure
+if [ ! -f "$BUILD/shaktra/.claude-plugin/plugin.json" ]; then
+  echo "  FAIL: shaktra/plugin.json missing"
   errors=$((errors + 1))
 fi
 
-agent_count=$(ls "$BUILD/agents/"*.md 2>/dev/null | wc -l | tr -d ' ')
+# Count agents in shaktra (12 expected)
+agent_count=$(ls "$BUILD/shaktra/agents/"*.md 2>/dev/null | wc -l | tr -d ' ')
 if [ "$agent_count" -ne 12 ]; then
-  echo "  FAIL: expected 12 agents, found $agent_count"
+  echo "  FAIL: expected 12 agents in shaktra, found $agent_count"
   errors=$((errors + 1))
 fi
 
-skill_count=$(ls -d "$BUILD/skills/"*/ 2>/dev/null | wc -l | tr -d ' ')
+# Count skills in shaktra (16 expected)
+skill_count=$(ls -d "$BUILD/shaktra/skills/"*/ 2>/dev/null | wc -l | tr -d ' ')
 if [ "$skill_count" -ne 16 ]; then
-  echo "  FAIL: expected 16 skills, found $skill_count"
+  echo "  FAIL: expected 16 skills in shaktra, found $skill_count"
   errors=$((errors + 1))
 fi
 
-script_count=$(ls "$BUILD/scripts/"*.py 2>/dev/null | wc -l | tr -d ' ')
+# Count scripts in shaktra (5 expected)
+script_count=$(ls "$BUILD/shaktra/scripts/"*.py 2>/dev/null | wc -l | tr -d ' ')
 if [ "$script_count" -ne 5 ]; then
-  echo "  FAIL: expected 5 scripts, found $script_count"
+  echo "  FAIL: expected 5 scripts in shaktra, found $script_count"
   errors=$((errors + 1))
 fi
 
-if [ ! -f "$BUILD/hooks/hooks.json" ]; then
-  echo "  FAIL: hooks.json missing"
+# hooks.json present in shaktra
+if [ ! -f "$BUILD/shaktra/hooks/hooks.json" ]; then
+  echo "  FAIL: shaktra/hooks.json missing"
   errors=$((errors + 1))
 fi
 
-if [ ! -d "$BUILD/docs" ]; then
-  echo "  FAIL: docs/ missing (README links depend on it)"
-  errors=$((errors + 1))
-fi
-
-if [ ! -d "$BUILD/diagrams" ]; then
-  echo "  FAIL: diagrams/ missing (README links depend on it)"
-  errors=$((errors + 1))
-fi
-
-for devfile in CLAUDE.md .claude .local .venv; do
+# No dev-only files
+for devfile in CLAUDE.md docs .claude .local .venv dist; do
   if [ -e "$BUILD/$devfile" ]; then
     echo "  FAIL: dev-only '$devfile' found in release build"
     errors=$((errors + 1))
@@ -158,7 +150,6 @@ echo "Validation passed"
 
 MAIN_SHA=$(git rev-parse HEAD)
 
-# Stash current branch name so we can return to it
 if git rev-parse --verify release >/dev/null 2>&1; then
   git checkout release
   # Remove all tracked files to start clean

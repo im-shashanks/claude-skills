@@ -8,6 +8,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Version numbers 
 
 ## [0.1.3] - 2026-02-15
 
+### Fixed
+- **Release branch README** — Root README is now a marketplace catalog (`README-marketplace.md`) instead of a copy of Shaktra's README, fixing broken relative links to `./docs/` and `./diagrams/`
+- **Local publish script** — `scripts/publish-release.sh` rewritten to match CI workflow structure (multi-plugin `shaktra/` directory layout instead of flat root promotion)
+
 ### Added
 - **File-read tracking in test framework** — captures every Read tool invocation (including sub-agent reads) via stream-json parsing, reports which plugin reference files each workflow actually consulted
 - **Expected reads validation** — test definitions can declare `expected_reads` patterns (substring matches against file paths); dev test validates 8 patterns covering practices, quality checks, severity taxonomy, story, settings, and handoff files

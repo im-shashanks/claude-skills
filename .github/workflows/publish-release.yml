@@ -51,8 +51,8 @@ jobs:
               json.dumps(data, indent=2) + '\n')
           "
 
-          # Copy user-facing README from plugin directory
-          cp dist/shaktra/README.md "$BUILD/README.md"
+          # Copy marketplace README for release branch root
+          cp README-marketplace.md "$BUILD/README.md"
 
           # Copy CHANGELOG for user visibility
           cp CHANGELOG.md "$BUILD/CHANGELOG.md"
