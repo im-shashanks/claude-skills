@@ -10,6 +10,9 @@ release-build/
 # Local non-committed files
 .local/
 
+# Personal archive folder
+docs/archive/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
