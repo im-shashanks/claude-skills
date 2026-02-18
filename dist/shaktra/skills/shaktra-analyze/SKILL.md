@@ -40,8 +40,8 @@ Analysis without ground truth is guessing. Stage 1 produces factual data via too
 ### Step 1: Read Project Context
 
 - Read `.shaktra/settings.yml` — project config, language, thresholds
-- Read `.shaktra/memory/decisions.yml` — architectural decisions (if exists)
-- Read `.shaktra/memory/lessons.yml` — past insights (if exists)
+- Read `.shaktra/memory/principles.yml` — project principles (if exists)
+- Read `.shaktra/memory/anti-patterns.yml` — failure patterns (if exists)
 
 ### Step 2: Check Manifest for Resumability
 

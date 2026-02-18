@@ -30,7 +30,7 @@ Shaktra orchestrates 12 specialized sub-agents, each with a defined role, strict
 
 **Produces:** Gap answers with decision logging, RICE-scored story rankings, coverage reports, brainstorm docs, PRDs, research synthesis, personas, and journey maps.
 
-**Key behaviors:** Exhausts all sources (PRD, architecture, decisions, lessons) before escalating to the user. Logs every decision to `decisions.yml`. Uses concrete numbers -- never "roughly medium."
+**Key behaviors:** Exhausts all sources (PRD, architecture, principles, memory stores) before escalating to the user. Logs observations for consolidation by the Memory Curator. Uses concrete numbers -- never "roughly medium."
 
 ### Scrum Master
 
@@ -82,7 +82,7 @@ Shaktra orchestrates 12 specialized sub-agents, each with a defined role, strict
 
 **Produces:** Production code passing all tests, coverage report, staged files (never commits). Updated `handoff.yml` with code summary. Emits `TESTS_NOT_GREEN` or `COVERAGE_GATE_FAILED` on failure.
 
-**Key behaviors:** Follows implementation order from the plan exactly. Applies all patterns from `patterns_applied`. Checks coverage against tier-specific thresholds from settings. Captures new pattern decisions for promotion to `decisions.yml`.
+**Key behaviors:** Follows implementation order from the plan exactly. Applies all patterns from `patterns_applied`. Checks coverage against tier-specific thresholds from settings. Captures observations for consolidation via memory-curator.
 
 ### SW Quality
 
@@ -134,9 +134,9 @@ Shaktra orchestrates 12 specialized sub-agents, each with a defined role, strict
 
 **Invoked by:** Every workflow at completion (`/shaktra:tpm`, `/shaktra:dev`, `/shaktra:bugfix`, `/shaktra:analyze`, `/shaktra:general`).
 
-**Produces:** Updated `.shaktra/memory/lessons.yml` with new entries (if any meet the capture bar).
+**Produces:** Updated `.shaktra/memory/principles.yml`, `anti-patterns.yml`, and `procedures.yml` by consolidating observations.
 
-**Key behaviors:** Ruthlessly selective -- only captures insights that would materially change future workflow execution. No routine observations ("tests passed"). Max 100 active entries with archival. Each lesson requires a concrete, actionable `action` field.
+**Key behaviors:** Ruthlessly selective -- only consolidates insights that would materially change future workflow execution. No routine observations ("tests passed"). Reads from `observations.yml` and distributes consolidated knowledge into the appropriate memory store (principles, anti-patterns, or procedures). Each entry requires concrete, actionable guidance.
 
 ## Orchestration Patterns
 

@@ -1,6 +1,6 @@
 # Shaktra — Maintainer & Contributor Guide
 
-**Shaktra is an opinionated AI development framework distributed as a Claude Code plugin, orchestrating 12 specialized agents through TDD workflows to produce production-ready code.**
+**Shaktra is an opinionated AI development framework distributed as a Claude Code plugin, orchestrating 13 specialized agents through TDD workflows to produce production-ready code.**
 
 ## What Makes Shaktra Unique
 
@@ -13,7 +13,7 @@
 **Key Metrics:**
 | Component | Count | Purpose |
 |-----------|-------|---------|
-| Agents | 12 | Domain experts spawned by skills |
+| Agents | 13 | Domain experts spawned by skills |
 | Skills | 16 | User-invocable orchestrators + internal references |
 | Hooks | 4 | Enforcement layer (block on failure) |
 | State Schemas | 5 | YAML templates for `.shaktra/` state files |
@@ -941,7 +941,7 @@ A: Split it:
 
 See GitHub releases for changelog and version history.
 
-Current version: **0.1.5**
+Current version: **0.2.0**
 
 ---
 

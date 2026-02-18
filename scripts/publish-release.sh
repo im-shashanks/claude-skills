@@ -99,10 +99,10 @@ if [ ! -f "$BUILD/shaktra/.claude-plugin/plugin.json" ]; then
   errors=$((errors + 1))
 fi
 
-# Count agents in shaktra (12 expected)
+# Count agents in shaktra (13 expected)
 agent_count=$(ls "$BUILD/shaktra/agents/"*.md 2>/dev/null | wc -l | tr -d ' ')
-if [ "$agent_count" -ne 12 ]; then
-  echo "  FAIL: expected 12 agents in shaktra, found $agent_count"
+if [ "$agent_count" -ne 13 ]; then
+  echo "  FAIL: expected 13 agents in shaktra, found $agent_count"
   errors=$((errors + 1))
 fi
 
@@ -113,10 +113,10 @@ if [ "$skill_count" -ne 16 ]; then
   errors=$((errors + 1))
 fi
 
-# Count scripts in shaktra (5 expected)
+# Count scripts in shaktra (8 expected)
 script_count=$(ls "$BUILD/shaktra/scripts/"*.py 2>/dev/null | wc -l | tr -d ' ')
-if [ "$script_count" -ne 5 ]; then
-  echo "  FAIL: expected 5 scripts in shaktra, found $script_count"
+if [ "$script_count" -ne 8 ]; then
+  echo "  FAIL: expected 8 scripts in shaktra, found $script_count"
   errors=$((errors + 1))
 fi
 

@@ -6,6 +6,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Version numbers 
 
 ---
 
+## [0.2.0] - 2026-02-17
+
+### Added
+- **Tiered memory retrieval** — 3-tier architecture for briefing generation that scales with memory store size. Tier 1 (≤100 entries): inline generation. Tier 2 (≤500): dedicated memory-retriever agent. Tier 3 (500+): parallel chunk retrieval with consolidation.
+- **`shaktra-memory-retriever` agent** — New sonnet-model agent with 3 modes (briefing, chunk, consolidate) for offloading context-heavy memory filtering from orchestrators.
+- **`memory_retrieval.py` script** — Counts active memory entries, determines retrieval tier, and splits entries into chunks for Tier 3 processing.
+- **`retrieval-guide.md`** — Shared retrieval algorithm (relevance scoring, dispatch templates) referenced by all orchestrators and the memory-retriever agent. Eliminates duplication across workflows.
+- **5 new memory settings** — `briefing_confidence_threshold`, `retrieval_tier1_max`, `retrieval_tier2_max`, `max_briefing_entries`, `retrieval_chunk_size` in `settings.yml`.
+
+### Changed
+- **`/shaktra:dev` and `/shaktra:review`** — Replaced inline briefing generation with tier-aware retrieval (calls `memory_retrieval.py`, dispatches memory-retriever for Tier 2/3).
+- **`/shaktra:bugfix`** — Added missing `procedures.yml` reading and `.observations.yml` creation.
+- **`briefing-schema.md`** — Removed hardcoded 0.4 confidence threshold, now references `settings.memory.briefing_confidence_threshold`. Added tier selection table.
+- **`/shaktra:doctor`** — Updated expected counts (13 agents, 8 scripts).
+- **CI and publish script** — Updated structural validation counts (13 agents, 8 scripts).
+
+---
+
 ## [0.1.5] - 2026-02-16
 
 ### Changed

@@ -1,10 +1,10 @@
 # Shaktra
 
-**Turn Claude Code into a 12-person development team — from design to deployment, with zero bugs reaching production.**
+**Turn Claude Code into a 13-person development team — from design to deployment, with zero bugs reaching production.**
 
 | | |
 |---|---|
-| **Version** | 0.1.5 |
+| **Version** | 0.2.0 |
 | **License** | MIT |
 | **Claude Code** | February 2025+ |
 | **Platform** | Claude code native (macOS, Linux, Windows) |
@@ -81,7 +81,7 @@ Three commands take you from idea to production-ready code:
 
 ❌ **Solo developers lack team capabilities** — No architect, no PM, no dedicated QA. You wear all hats, poorly.
 
-**Shaktra solves this** with enforced quality gates at every phase and 12 specialized AI agents that give you team-level capabilities without the team.
+**Shaktra solves this** with enforced quality gates at every phase and 13 specialized AI agents that give you team-level capabilities without the team.
 
 ---
 
@@ -117,6 +117,10 @@ Strict state machine: **PLAN → RED → GREEN → QUALITY → MEMORY → COMPLE
 - QUALITY phase: 36 checks across 8 dimensions, P0 blocks progress
 
 [See TDD workflow](./docs/workflows/DEV.md) →
+
+### 🧠 Learns From Every Story
+
+Shaktra captures observations during each workflow — what worked, what failed, what surprised — and consolidates them into principles, anti-patterns, and procedures. Before the next story begins, a briefing filters relevant knowledge for each agent. Agents apply that knowledge during implementation, then write new observations that reinforce or challenge existing entries. Confidence scores track how well each piece of knowledge holds up: entries that keep proving true grow stronger, entries that get contradicted fade out and are archived. The result is a framework that genuinely improves the more you use it.
 
 ### 📊 Ceremony Scales With Complexity
 
@@ -287,8 +291,8 @@ Quality and TDD discipline matter more than platform flexibility or custom workf
 
 ### Advanced Topics
 - [Quality Philosophy](./docs/QUALITY.md) — P0-P3 taxonomy, merge gates, severity criteria
-- [Agent Architecture](./docs/AGENTS.md) — 12 agents, orchestration, model allocation
-- [State Files](./docs/STATE.md) — How Shaktra tracks memory, decisions, lessons
+- [Agent Architecture](./docs/AGENTS.md) — 13 agents, orchestration, model allocation
+- [State Files](./docs/STATE.md) — How Shaktra tracks memory, observations, and knowledge stores
 
 ### Community & Support
 - 🐛 [Report Issues](https://github.com/im-shashanks/shaktra-plugin/issues)

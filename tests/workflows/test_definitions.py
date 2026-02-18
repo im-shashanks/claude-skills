@@ -55,7 +55,14 @@ Events to log:
 - Quality fix: `"QUALITY-FIX: fixing <count> findings in <artifact>"`
 - File write: `"WRITE: <file-path>"`
 - Sprint allocation: `"SPRINT: allocated <count> stories to <sprint-id>"`
-- Memory capture: `"MEMORY: captured <count> lessons"`
+- Briefing generation: `"MEMORY: briefing generated for <story_id> — <count> principles, <count> anti-patterns, <count> procedures included"`
+- Briefing entry detail (for each entry included): `"MEMORY: briefing includes <PR-NNN|AP-NNN|PC-NNN> — <first 60 chars of text> (roles: <roles>)"`
+- Agent briefing read: `"MEMORY: [agent-name] read briefing — <count> principles, <count> anti-patterns, <count> procedures applicable to role"`
+- Agent applied principle: `"MEMORY: [agent-name] applying <PR-NNN> — <short description of how it was applied>"`
+- Observation written: `"MEMORY: observation <OB-NNN> written — type=<type> importance=<N>"`
+- Consistency check: `"MEMORY: consistency-check <OB-NNN> — <principle_id> relationship=<reinforce|weaken|contradict>"`
+- Memory consolidation: `"MEMORY: consolidated — <N> principles (M reinforced, K new), <N> anti-patterns, <N> procedures"`
+- Memory capture: `"MEMORY: memory_captured=true"`
 - Agent complete: `"[agent-name] complete"`
 """
 
@@ -91,8 +98,9 @@ def setup_shaktra_from_templates(test_dir: Path, settings: dict) -> None:
     copies = {
         "settings.yml": shaktra / "settings.yml",
         "sprints.yml": shaktra / "sprints.yml",
-        "decisions.yml": shaktra / "memory" / "decisions.yml",
-        "lessons.yml": shaktra / "memory" / "lessons.yml",
+        "principles.yml": shaktra / "memory" / "principles.yml",
+        "anti-patterns.yml": shaktra / "memory" / "anti-patterns.yml",
+        "procedures.yml": shaktra / "memory" / "procedures.yml",
         "analysis-manifest.yml": shaktra / "analysis" / "manifest.yml",
         "shaktra-CLAUDE.md": shaktra / "CLAUDE.md",
         "CLAUDE.md": test_dir / "CLAUDE.md",
@@ -182,7 +190,7 @@ def setup_bugfix(test_dir: Path) -> None:
 
 
 def setup_dev(test_dir: Path) -> None:
-    """Dev setup: greenfield + story + design doc + memory templates."""
+    """Dev setup: greenfield + story + design doc + seeded memory."""
     setup_git_init(test_dir)
     setup_shaktra_from_templates(test_dir, _greenfield_settings())
 
@@ -203,6 +211,15 @@ def setup_dev(test_dir: Path) -> None:
         src = FIXTURES_DIR / "greenfield" / f
         if src.exists():
             shutil.copy2(src, shaktra / f)
+
+    # Seed memory with prior learnings (overwrite empty templates)
+    # These simulate knowledge from prior stories (PR-001, PR-002, AP-001, PC-001)
+    # that are relevant to ST-TEST-001 (user registration endpoint).
+    memory_dir = shaktra / "memory"
+    for mem_file in ["principles.yml", "anti-patterns.yml", "procedures.yml"]:
+        src = FIXTURES_DIR / "memory" / mem_file
+        if src.exists():
+            shutil.copy2(src, memory_dir / mem_file)
 
     _append_test_overrides(test_dir / "CLAUDE.md")
 
@@ -406,8 +423,8 @@ def get_test_definitions(test_dir: str) -> list[dict]:
         {
             "name": "dev",
             "category": "greenfield",
-            "timeout": 1800,
-            "max_turns": 65,
+            "timeout": 2400,
+            "max_turns": 85,
             "setup": lambda td: setup_dev(td),
             "prompt": build_prompt(
                 "dev", "shaktra-dev",
