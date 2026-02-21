@@ -145,6 +145,36 @@ Complete reference for all Shaktra commands. Commands are organized into **main 
 
 ---
 
+### `/shaktra:adversarial-review <story-id|pr>` — Adversarial Review
+
+**Purpose:** Mutation testing, adversarial input probing, and fault injection against code changes
+
+**When to use:**
+- After `/shaktra:dev` completes, to verify tests actually catch behavior changes
+- Before merging a PR with security-critical or high-risk code
+- When you want execution-based evidence beyond traditional code review
+
+**3 probe groups (run in parallel):**
+
+| Group | What it does |
+|-------|-------------|
+| Mutation Probes | Mutate changed code one line at a time, run tests, check if mutations are killed |
+| Input & Boundary Probes | Generate adversarial inputs (null, injection, boundary values) and test handling |
+| Fault & Resilience Probes | Mock dependencies to fail (timeouts, errors, partial responses) and test resilience |
+
+**Mutation operators:** Arithmetic, relational, logical, conditional, return value, exception, boundary, deletion — 8 categories applied to changed functions.
+
+**Safety protocol:** Every mutation is applied, tested, and restored before the next. Files are verified after restoration. If restoration fails, the review stops immediately.
+
+**Verdict logic:**
+- Any P0 finding → **BLOCKED**
+- P1 over threshold or mutation score below threshold → **CONCERN**
+- Clean → **PASS**
+
+**Test persistence:** Generated adversarial tests can be persisted (`auto`, `always`, `never`, or `ask`) per `settings.adversarial_review.test_persistence`.
+
+---
+
 ### `/shaktra:general` — Domain Expert
 
 **Purpose:** Domain expertise, architectural guidance, technical questions

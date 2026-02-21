@@ -1,10 +1,10 @@
 # Shaktra
 
-**Turn Claude Code into a 13-person development team — from design to deployment, with zero bugs reaching production.**
+**Turn Claude Code into a 14-agent development team — from design to deployment, with zero bugs reaching production.**
 
 | | |
 |---|---|
-| **Version** | 0.2.0 |
+| **Version** | 0.3.0 |
 | **License** | MIT |
 | **Claude Code** | February 2025+ |
 | **Platform** | Claude code native (macOS, Linux, Windows) |
@@ -67,7 +67,13 @@ Three commands take you from idea to production-ready code:
 ```
 **Result:** 13-dimension analysis → 6 verification tests → **APPROVED** or **BLOCKED** (P0 findings prevent merge)
 
-**In 3 commands:** Idea → production code with 90% coverage, zero P0 findings, and full design documentation.
+```bash
+# 4. Adversarial testing (optional — mutation + fault injection)
+/shaktra:adversarial-review ST-001
+```
+**Result:** 18 mutations applied → 14 killed (78%) → adversarial input & fault probes → **PASS** or **BLOCKED**
+
+**In 4 commands:** Idea → production code with 90% coverage, zero P0 findings, full design documentation, and adversarial verification.
 
 [See the full decision tree](./diagrams/01-quick-start-decision-tree.md) →
 
@@ -81,17 +87,17 @@ Three commands take you from idea to production-ready code:
 
 ❌ **Solo developers lack team capabilities** — No architect, no PM, no dedicated QA. You wear all hats, poorly.
 
-**Shaktra solves this** with enforced quality gates at every phase and 13 specialized AI agents that give you team-level capabilities without the team.
+**Shaktra solves this** with enforced quality gates at every phase and 14 specialized AI agents that give you team-level capabilities without the team.
 
 ---
 
 ## How Shaktra Gives You Superpowers
 
-### 🤖 12-Person Team. (*pssst! no hiring*)
+### 🤖 14-Agent Team. (*pssst! no hiring*)
 
-From Architect to Memory Curator, specialized agents handle design, planning, implementation, testing, and review. Solo developers get team-level capabilities; teams get consistency across all members.
+From Architect to Adversary, specialized agents handle design, planning, implementation, testing, review, and adversarial probing. Solo developers get team-level capabilities; teams get consistency across all members.
 
-**Agents:** Architect (design), Product Manager (requirements), Scrum Master (stories), SW Engineer (planning), Test Agent (TDD), Developer (implementation), SW Quality (story-level QA), Code Reviewer (app-level QA), Bug Diagnostician (root cause analysis), Memory Curator (institutional knowledge), CBA Analyzer (brownfield assessment), TPM Quality (artifact review)
+**Agents:** Architect (design), Product Manager (requirements), Scrum Master (stories), SW Engineer (planning), Test Agent (TDD), Developer (implementation), SW Quality (story-level QA), Code Reviewer (app-level QA), Bug Diagnostician (root cause analysis), Memory Curator (institutional knowledge), Memory Retriever (briefing generation), CBA Analyzer (brownfield assessment), TPM Quality (artifact review), Adversary (mutation testing & fault injection)
 
 [See full agent architecture](./docs/AGENTS.md) →
 
@@ -278,7 +284,7 @@ Quality and TDD discipline matter more than platform flexibility or custom workf
 ## Learn More
 
 ### Core Documentation
-- 📖 [Complete Command Reference](./docs/COMMANDS.md) — All 11 workflows detailed
+- 📖 [Complete Command Reference](./docs/COMMANDS.md) — All 14 workflows detailed
 - ⚙️ [Configuration Guide](./docs/CONFIGURATION.md) — settings.yml, hooks, thresholds
 - 🔍 [Troubleshooting](./docs/TROUBLESHOOTING.md) — Common issues and fixes
 - 🎨 [Workflow Diagrams](./diagrams/) — 33 visual workflows
@@ -291,7 +297,7 @@ Quality and TDD discipline matter more than platform flexibility or custom workf
 
 ### Advanced Topics
 - [Quality Philosophy](./docs/QUALITY.md) — P0-P3 taxonomy, merge gates, severity criteria
-- [Agent Architecture](./docs/AGENTS.md) — 13 agents, orchestration, model allocation
+- [Agent Architecture](./docs/AGENTS.md) — 14 agents, orchestration, model allocation
 - [State Files](./docs/STATE.md) — How Shaktra tracks memory, observations, and knowledge stores
 
 ### Community & Support
@@ -300,4 +306,4 @@ Quality and TDD discipline matter more than platform flexibility or custom workf
 
 ---
 
-**License:** MIT • **Version:** 0.1.3 • Built with ❤️ for AI developers
+**License:** MIT • **Version:** 0.3.0 • Built with ❤️ for AI developers

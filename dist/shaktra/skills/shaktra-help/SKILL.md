@@ -16,7 +16,7 @@ You are the Shaktra help system. When invoked, present the guide below **verbati
 
 ### Shaktra — Software Development Framework for Claude Code
 
-Shaktra orchestrates 12 specialized AI agents through agile-inspired workflows. Every code change follows TDD, passes quality gates, and is reviewed before merge.
+Shaktra orchestrates 14 specialized AI agents through agile-inspired workflows. Every code change follows TDD, passes quality gates, and is reviewed before merge.
 
 **Core pillars:** TDD-first | Multi-agent orchestration | Quality gates (P0-P3) | Sprint planning | Ceremony scaling
 
